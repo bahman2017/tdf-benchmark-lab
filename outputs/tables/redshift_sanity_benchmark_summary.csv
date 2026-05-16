@@ -1,0 +1,8 @@
+case_name,regime,z_tau,max_allowed_abs_z_tau,ratio_to_limit,status,expected_status,matches_expected,warning,benchmark_mode,is_real_observational_data
+negligible_tau_shift,negligible tau-induced shift,1e-12,1e-08,9.999999999999999e-05,pass,pass,True,,redshift_sanity_lcdm_benchmark,False
+small_allowed_shift,small allowed tau shift,1e-09,1e-08,0.1,pass,pass,True,,redshift_sanity_lcdm_benchmark,False
+borderline_shift,borderline tau shift,8e-09,1e-08,0.8,borderline,borderline,True,borderline: within tolerance but near configured limit,redshift_sanity_lcdm_benchmark,False
+too_large_shift,overlarge tau shift (expected fail),5e-07,1e-08,50.0,fail,fail,True,expected fail: tau redshift exceeds benchmark cap,redshift_sanity_lcdm_benchmark,False
+galaxy_rotation_doppler_proxy,galaxy rotation Doppler proxy,1e-07,1e-06,0.1,pass,pass,True,,redshift_sanity_lcdm_benchmark,False
+cluster_gravitational_redshift_proxy,cluster gravitational redshift proxy,5e-06,1e-05,0.5,pass,pass,True,,redshift_sanity_lcdm_benchmark,False
+precision_clock_proxy,precision clock / weak-field proxy,1e-13,1e-12,0.1,pass,pass,True,,redshift_sanity_lcdm_benchmark,False

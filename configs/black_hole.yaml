@@ -1,0 +1,11 @@
+# Phase 7 — phenomenological BH checks (synthetic validation only)
+objects:
+  - id: bh_10msun
+    mass_solar: 10.0
+    rc_m: 0.0
+  - id: bh_10msun_rc_near_rs
+    mass_solar: 10.0
+    rc_m: 1.0e-10  # set programmatically in tests; demo uses small rc
+  - id: bh_10msun_rc_half_rs
+    mass_solar: 10.0
+    rc_fraction_of_rs: 0.5

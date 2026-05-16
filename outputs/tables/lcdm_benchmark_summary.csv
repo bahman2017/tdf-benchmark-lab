@@ -1,0 +1,16 @@
+benchmark_mode,is_real_observational_data,benchmark,case_name,status,details,epsilon_tau,max_allowed_epsilon,phi_b,phi_tau_assumed,rc_over_rs,r_nr_ratio,T_ratio,expected_ratio,z_tau,delta_tau,K_tau,max_allowed_z_tau,category
+lcdm_benchmark_recovery,False,solar_system_gr_safe,earth_orbit,pass,Earth orbit,-1.596500470967639e-18,1e-08,-62637000.0,1e-10,,,,,,,,,
+lcdm_benchmark_recovery,False,solar_system_gr_safe,mercury_orbit,pass,Mercury orbit,-5.882352941176471e-19,1e-08,-85000000.0,5e-11,,,,,,,,,
+lcdm_benchmark_recovery,False,solar_system_gr_safe,light_bending_sun,pass,light-bending near Sun,-1e-20,1e-09,-100000000.0,1e-12,,,,,,,,,
+lcdm_benchmark_recovery,False,solar_system_gr_safe,gps_weak_field_clock,pass,GPS-like weak-field clock regime,-1.6666666666666665e-19,1e-08,-60000000.0,1e-11,,,,,,,,,
+lcdm_benchmark_recovery,False,black_hole_gr_limit,rc_over_rs_0,pass,expected_ratio=1,,,,,0.0,1.0,1.0,1.0,,,,,
+lcdm_benchmark_recovery,False,black_hole_gr_limit,rc_over_rs_1e-06,pass,expected_ratio=1,,,,,1e-06,0.9999999999995,0.9999999999995,0.9999999999995,,,,,
+lcdm_benchmark_recovery,False,black_hole_gr_limit,rc_over_rs_0.0001,pass,expected_ratio=1,,,,,0.0001,0.9999999949999999,0.9999999949999999,0.9999999949999999,,,,,
+lcdm_benchmark_recovery,False,black_hole_gr_limit,rc_over_rs_0.01,pass,expected_ratio=0.99995,,,,,0.01,0.9999499987499375,0.9999499987499375,0.9999499987499375,,,,,
+lcdm_benchmark_recovery,False,black_hole_gr_limit,rc_over_rs_0.1,pass,expected_ratio=0.994987,,,,,0.1,0.9949874371066199,0.99498743710662,0.99498743710662,,,,,
+lcdm_benchmark_recovery,False,black_hole_gr_limit,rc_over_rs_0.5,pass,expected_ratio=0.866025,,,,,0.5,0.8660254037844387,0.8660254037844386,0.8660254037844386,,,,,
+lcdm_benchmark_recovery,False,black_hole_gr_limit,rc_over_rs_0.9,pass,expected_ratio=0.43589,,,,,0.9,0.4358898943540674,0.4358898943540673,0.4358898943540673,,,,,
+lcdm_benchmark_recovery,False,redshift_sanity,negligible,pass,negligible,,,,,,,,,1.1126500560536185e-17,1.0,1.0,1e-15,negligible
+lcdm_benchmark_recovery,False,redshift_sanity,small_allowed,pass,small_allowed,,,,,,,,,1.1126500560536184e-09,100000000.0,1.0,1e-06,small_allowed
+lcdm_benchmark_recovery,False,redshift_sanity,borderline,pass,borderline: within tolerance but near limit,,,,,,,,,9.902585498877206e-07,89000000000.0,1.0,1e-06,borderline
+lcdm_benchmark_recovery,False,redshift_sanity,too_large,fail,expected fail: tau correction too large for scaffold,,,,,,,,,1.1126500560536185e-05,1000000000000.0,1.0,1e-08,too_large

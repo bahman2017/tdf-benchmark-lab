@@ -1,0 +1,12 @@
+# Phase 6 — example GR-safe checks (phenomenological)
+constraints:
+  - name: earth_orbit_scale
+    radius_m: 1.496e11
+    phi_b: -6.2637e7
+    phi_tau: 1e-10
+    max_epsilon_tau: 1.0e-8
+  - name: cassini_scale_placeholder
+    radius_m: 8.0e11
+    phi_b: -1.0e8
+    phi_tau: 1e-12
+    max_epsilon_tau: 1.0e-9

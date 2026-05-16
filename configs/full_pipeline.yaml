@@ -1,0 +1,12 @@
+# Master pipeline toggles
+rotation:
+  synthetic: true
+  real_data: true
+lensing:
+  enabled: false
+redshift:
+  enabled: false
+solar_system:
+  enabled: true
+black_hole:
+  enabled: true

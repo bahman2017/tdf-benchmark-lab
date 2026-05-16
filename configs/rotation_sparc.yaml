@@ -1,0 +1,12 @@
+# Rotation pipeline (Phase 1 synthetic + Phase 2 SPARC)
+synthetic:
+  galaxy_id: synthetic_001
+  B_true: 800.0
+  r0_true: 4.0
+  n_points: 25
+  noise_fraction: 0.03
+  seed: 42
+
+real_data:
+  processed_csv: data/processed/rotation.csv
+  # Expected columns: galaxy_id, r_kpc, v_obs, v_err, v_baryon
