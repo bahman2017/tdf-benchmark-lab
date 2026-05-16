@@ -203,7 +203,8 @@ Phase 4 (compatibility recovery) is complete; stress tests now examine problem r
 | Subphase | Topic | Status |
 |----------|-------|--------|
 | **5B** | Rotation-curve diversity stress test | ✅ implemented |
-| **5C+** | Missing satellites, Hubble tension, etc. | not_yet_tested |
+| **5C** | Same-τ multi-observable consistency | ✅ implemented |
+| **5C+** | Hubble tension, missing satellites, etc. | not_yet_tested |
 
 ### Phase 5B — Rotation-curve diversity stress test ✅ (implemented)
 
@@ -216,6 +217,22 @@ Phase 4 (compatibility recovery) is complete; stress tests now examine problem r
 **Outputs:** `rotation_diversity_stress_summary.csv`, `rotation_diversity_stress_report.md`, `rotation_diversity_<case>.png`
 
 **Status:** implemented. **Not** SPARC / real-sky validation.
+
+### Phase 5C — Same-τ multi-observable consistency benchmark ✅ (implemented)
+
+**Objective:** Fit **(B, r0)** from synthetic rotation only; freeze; predict lensing-proxy
+`α_τ ∝ B/(R+r0)` and redshift-proxy `z_τ = ΔΦ_τ/c²` from the same `Φ_τ = B log(1+r/r0)`.
+
+**Banner:** `SAME-TAU MULTI-OBSERVABLE BENCHMARK — NOT REAL OBSERVATIONAL DATA`
+
+**Commands:** `python scripts/run_same_tau_consistency.py`
+
+**Outputs:** `same_tau_consistency_summary.csv`, `same_tau_consistency_report.md`,
+`same_tau_<case>_rotation.png`, `same_tau_<case>_lensing.png`, `same_tau_<case>_redshift.png`
+
+**Pass rule:** rotation, lensing, and redshift relative errors all &lt; 5% (controlled synthetic).
+
+**Status:** implemented (6 cases). **Not** observational validation; no separate τ fits per channel.
 
 ---
 

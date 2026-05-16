@@ -81,6 +81,7 @@ See [docs/SCIENTIFIC_ASSUMPTIONS.md](./docs/SCIENTIFIC_ASSUMPTIONS.md).
 | 4D | Redshift / Doppler sanity benchmark |
 | 5A | Core–cusp stress test |
 | 5B | Rotation-curve diversity stress test |
+| 5C | Same-τ multi-observable consistency (rotation → lensing/redshift proxies) |
 
 Details: [docs/TEST_PLAN.md](./docs/TEST_PLAN.md), [docs/BENCHMARK_MANIFEST.md](./docs/BENCHMARK_MANIFEST.md).
 
@@ -134,6 +135,7 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | `python scripts/run_redshift_sanity_benchmark.py` | 4D |
 | `python scripts/run_core_cusp_stress.py` | 5A |
 | `python scripts/run_rotation_diversity_stress.py` | 5B |
+| `python scripts/run_same_tau_consistency.py` | 5C |
 
 Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 

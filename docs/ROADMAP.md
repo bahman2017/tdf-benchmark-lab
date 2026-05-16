@@ -21,6 +21,7 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 | **4D** | Redshift / Doppler sanity benchmark | ✅ |
 | **5A** | Core–cusp stress test (cuspy vs cored teachers) | ✅ |
 | **5B** | Rotation-curve diversity stress test (10 shapes) | ✅ |
+| **5C** | Same-τ multi-observable consistency (rotation / lensing / redshift proxies) | ✅ |
 
 Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
 
@@ -31,8 +32,8 @@ Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPEND
 | Phase | Description | Status |
 |-------|-------------|--------|
 | **5B.1** | Failure-mode refinement (declining outer, inner-cusp/outer-flat teachers) | Planned |
-| **5C** | Hubble-tension style expansion benchmark (phenomenological) | Planned |
-| **5D** | Missing-satellites / small-scale suppression scaffold | Planned |
+| **5D** | Hubble-tension style expansion benchmark (phenomenological) | Planned |
+| **5E** | Missing-satellites / small-scale suppression scaffold | Planned |
 | **6** | Real observational calibration (SPARC etc.) — **postponed** | Deferred |
 | **7+** | Lensing consistency; redshift vs kinematics; solar-system ephemeris; BH observational constraints | Future |
 

@@ -107,6 +107,8 @@ All families use **configurable synthetic or surrogate** inputs unless Phase 6 e
 
 **Phase 5B (implemented):** Rotation-curve diversity stress — ten synthetic teacher shapes (fast/slow rise, baryon-dominated, outer decline/rise, flat extended, core/cusp+flat outer, dwarf). Banner: `ROTATION-CURVE DIVERSITY STRESS TEST — NOT REAL OBSERVATIONAL DATA`.
 
+**Phase 5C (implemented):** Same-τ multi-observable consistency — one fitted `Φ_τ(r)=B log(1+r/r0)` from rotation must predict a fixed lensing proxy `α_τ ∝ B/(R+r0)` and redshift proxy `z_τ=ΔΦ_τ/c²` without refitting τ. Banner: `SAME-TAU MULTI-OBSERVABLE BENCHMARK — NOT REAL OBSERVATIONAL DATA`. Command: `python scripts/run_same_tau_consistency.py`. This tests whether a **single τ profile** can connect rotation, lensing proxy, and redshift proxy in a controlled synthetic setting only — **not** real lensing or redshift data.
+
 Further Phase 5 topics:
 
 - Core–cusp (extended / real-data later) (spread of teacher classes TDF can/cannot mimic)

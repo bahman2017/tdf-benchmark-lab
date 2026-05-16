@@ -47,6 +47,7 @@ pytest
 | 4D Redshift | `python scripts/run_redshift_sanity_benchmark.py` | Configured z_τ only |
 | 5A Core–cusp | `python scripts/run_core_cusp_stress.py` | Cuspy vs cored teachers |
 | 5B Diversity | `python scripts/run_rotation_diversity_stress.py` | Ten shape families |
+| 5C Same-τ | `python scripts/run_same_tau_consistency.py` | Rotation fit → lensing/redshift proxies |
 
 Optional flags (examples):
 
@@ -69,6 +70,7 @@ python scripts/run_nfw_surrogate.py --case milky_way_like
 | Redshift | `outputs/tables/redshift_sanity_benchmark_summary.csv` | `outputs/reports/redshift_sanity_benchmark_report.md` |
 | Core–cusp | `outputs/tables/core_cusp_stress_summary.csv` | `outputs/reports/core_cusp_stress_report.md` |
 | Diversity | `outputs/tables/rotation_diversity_stress_summary.csv` | `outputs/reports/rotation_diversity_stress_report.md` |
+| Same-τ (5C) | `outputs/tables/same_tau_consistency_summary.csv` | `outputs/reports/same_tau_consistency_report.md` |
 
 Figures: `outputs/figures/` (per-case PNGs where applicable).
 
