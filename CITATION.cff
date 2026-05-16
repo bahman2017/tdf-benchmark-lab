@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this benchmark suite, please cite the associated paper/preprint when available."
+title: "TDF Benchmark Lab: Controlled ΛCDM/GR Recovery and Stress Tests for the Time Delay Field Framework"
+version: 0.1.0
+date-released: 2026-05-16
+authors:
+  - family-names: Masarrat
+    given-names: Bahman
+repository-code: "https://github.com/bahman2017/tdf-benchmark-lab"
+license: MIT
+keywords:
+  - time-delay-field
+  - benchmark
+  - rotation-curves
+  - cosmology
+  - phenomenology
+abstract: >
+  Reproducible benchmark and calibration diagnostics for the Time Delay Field (TDF)
+  v0.8.1 framework. Provides controlled ΛCDM/GR recovery tests and stress regimes
+  using synthetic teachers only. Does not constitute observational validation.

@@ -1,111 +1,70 @@
-# Roadmap — ΛCDM Compatibility and Recovery Testing
+# Roadmap — TDF Benchmark Lab
 
-**Current near-term focus:** use ΛCDM / GR+Dark Matter as a **teacher benchmark** in regimes where it already works well. Test whether TDF can recover or mimic those successful effective behaviors — **without** claiming observational validation.
+**Repository:** [tdf-benchmark-lab](https://github.com/bahman2017/tdf-benchmark-lab)
 
-> **Direction change (temporary):** Real SPARC / observational calibration is **not** the immediate next step. Do not download or ingest real sky data for calibration until Phase 4 compatibility work is substantially complete.
-
----
-
-## Implemented (Phases 1–3C)
-
-| Version | Milestone | Status |
-|---------|-----------|--------|
-| v0.1 | Phase 1 — Synthetic rotation recovery + scaffold | ✅ |
-| v0.2 | Phase 2 — SPARC ingestion **scaffold** (no auto-download; no fake real labels) | ✅ infrastructure only |
-| v0.3 | Phase 3 — Baryon / TDF / NFW baseline comparison (BIC) | ✅ |
-| v0.3B | Phase 3B — NFW surrogate teacher/student (3 benchmark profiles) | ✅ |
-| v0.3C | Phase 3C — ΛCDM/GR benchmark scaffolds (solar system, BH exterior, redshift sanity) | ✅ |
-
-All implemented benchmark outputs must remain labeled as **not real observational validation**.
+This roadmap tracks **benchmark and calibration** work only. Passing a phase does **not** mean TDF is observationally validated.
 
 ---
 
-## Phase 4 — ΛCDM Compatibility Expansion *(next)*
+## Implemented
 
-**Purpose:** Before using real observational data, test TDF against benchmark outputs from ΛCDM/GR+DM in regimes where ΛCDM is already successful.
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **1** | Synthetic / demo rotation validation | ✅ |
+| **2** | SPARC ingestion **scaffold** (no auto-download; no fake real labels) | ✅ |
+| **3** | Baryon / TDF / NFW baseline comparison (BIC) | ✅ |
+| **3B** | NFW surrogate teacher/student recovery | ✅ |
+| **3C** | ΛCDM/GR combined benchmark scaffold (solar, BH, redshift) | ✅ |
+| **4A** | Expanded NFW/ΛCDM rotation benchmark (10 cases) | ✅ |
+| **4B** | GR-safe local benchmark (7 regimes) | ✅ |
+| **4C** | Black-hole exterior GR-limit benchmark (q sweep) | ✅ |
+| **4D** | Redshift / Doppler sanity benchmark | ✅ |
+| **5A** | Core–cusp stress test (cuspy vs cored teachers) | ✅ |
+| **5B** | Rotation-curve diversity stress test (10 shapes) | ✅ |
 
-**Banner (all Phase 4 outputs):**  
-`ΛCDM/NFW BENCHMARK — NOT REAL OBSERVATIONAL DATA`
-
-### Phase 4A — Rotation NFW recovery expansion ✅ (implemented)
-
-- **10** benchmark galaxy-like profiles in `BENCHMARK_CASE_REGISTRY`.
-- Include representative archetypes: dwarf, LSB, Milky-Way-like, high-surface-brightness, extended disk.
-- Teacher: GR+DM/NFW-like effective rotation; student: TDF simple ansatz.
-- Pass/fail: TDF mimics teacher within configured relative curve error (same spirit as Phase 3B).
-
-### Phase 4B — GR-safe local tests ✅ (implemented)
-
-- Seven regimes: Mercury perihelion, Earth orbit, GPS clock, light bending, Shapiro delay, LLR, binary pulsar proxy.
-- Outputs: `gr_safe_benchmark_summary.csv`, `gr_safe_benchmark_report.md`.
-- Metric: ε_τ = Φ_τ/Φ_b vs configurable `max_allowed_epsilon`.
-- Goal: confirm TDF corrections can be **suppressed** where GR is already strongly tested.
-
-### Phase 4C — Black-hole exterior GR recovery ✅ (implemented)
-
-- q = rc/rs sweep; `black_hole_gr_benchmark` outputs and status classification.
-- r_nr/r_s and T/T_H vs √(1 − (rc/rs)²).
-- Strong-field formulas remain **phenomenological** — not derived metric claims.
-
-### Phase 4D — Redshift sanity expansion ✅ (implemented)
-
-- Seven configured z_τ cases; `redshift_sanity_benchmark` outputs and pass/borderline/fail classification.
-- Confirm tau-induced residuals stay bounded in GR-success regimes.
-- No real line-of-sight or cosmological data in this phase.
+Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
 
 ---
 
-## Phase 5 — ΛCDM Stress / Problem Regimes
+## Next
 
-Phase 4 complete. Stress tests examine ΛCDM tension regimes (not observational validation).
-
-### Phase 5A — Core–cusp stress test ✅ (implemented)
-
-- Cuspy NFW-like vs cored halo teachers; TDF simple vs TDF core proxy diagnostic.
-- Outputs: `core_cusp_stress_summary.csv`, `core_cusp_stress_report.md`.
-
-### Phase 5B — Rotation-curve diversity ✅ (implemented)
-
-- Ten synthetic teacher shape families; TDF simple vs TDF core vs NFW by BIC.
-
-Further topics:
-
-- Core–cusp (extended)
-- Missing satellites
-- Hubble tension (phenomenological placeholders)
-- Black-hole singularity / information paradox (ansatz-level only)
-
-Outputs: stress-test reports with explicit **benchmark / tension** labels, not validation claims.
+| Phase | Description | Status |
+|-------|-------------|--------|
+| **5B.1** | Failure-mode refinement (declining outer, inner-cusp/outer-flat teachers) | Planned |
+| **5C** | Hubble-tension style expansion benchmark (phenomenological) | Planned |
+| **5D** | Missing-satellites / small-scale suppression scaffold | Planned |
+| **6** | Real observational calibration (SPARC etc.) — **postponed** | Deferred |
+| **7+** | Lensing consistency; redshift vs kinematics; solar-system ephemeris; BH observational constraints | Future |
 
 ---
 
-## Phase 6 — Real observational calibration *(postponed)*
+## Phase 6 — Real observational calibration (postponed)
 
-**Intentionally deferred** until ΛCDM compatibility tests (Phase 4) are completed.
+**Gate:** Benchmark suite documented; reviewer-facing appendix complete; explicit metadata workflow for real SPARC.
 
-- Real SPARC rotation ingestion and per-galaxy calibration.
-- Requires confirmed `rotation_metadata.yaml` (`real_observational`).
-- No auto-download; no fake real-data labels.
+- User supplies raw data under `data/raw/` (no auto-download).
+- `rotation_metadata.yaml` must confirm `real_observational`.
+- Reports must **not** use demo/synthetic banners for real runs.
 
-See `docs/TEST_PLAN.md` for detailed steps when this phase opens.
+See [TEST_PLAN.md](./TEST_PLAN.md), [DATA_REQUIREMENTS.md](./DATA_REQUIREMENTS.md).
 
 ---
 
 ## Later channels (after Phase 6)
 
-| Version | Milestone |
-|---------|-----------|
-| v0.7 | Lensing consistency (shared τ parameters) |
-| v0.8 | Full redshift residual pipeline vs kinematics |
-| v0.9 | Solar-system coupling to ephemeris-scale constraints |
-| v1.0 | Multi-channel consistency report — still **not** "TDF validated" unless external review agrees |
+| Milestone | Content |
+|-----------|---------|
+| Lensing | Shared τ parameters; deflection integral |
+| Redshift | Full residual pipeline vs kinematics |
+| Solar system | Ephemeris-coupled ε_τ |
+| Multi-channel report | Joint constraints — still **not** “TDF validated” without external review |
 
 ---
 
-## What this roadmap does **not** mean
+## What this roadmap does not mean
 
-- Passing NFW surrogate or ΛCDM benchmark tests does **not** validate TDF.
-- Teacher benchmarks are **effective phenomenology** from ΛCDM/GR+DM, not proof that TDF is correct on the sky.
-- Real-data workflows are out of scope until Phase 6.
+- Benchmark success ≠ TDF validated.
+- Teacher curves ≠ real Universe.
+- Stress-test wins ≠ ΛCDM replaced.
 
-See also: `docs/LCDM_COMPATIBILITY_STRATEGY.md`, `docs/TEST_PLAN.md`.
+See [LCDM_COMPATIBILITY_STRATEGY.md](./LCDM_COMPATIBILITY_STRATEGY.md).

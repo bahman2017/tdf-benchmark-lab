@@ -1,8 +1,0 @@
-case_name,regime,phi_b_scale,assumed_phi_tau_scale,assumed_epsilon_tau_input,epsilon_tau,max_allowed_epsilon,status,pass,benchmark_mode,is_real_observational_data
-mercury_perihelion,Mercury perihelion regime,-85000000.0,4e-11,,-4.705882352941176e-19,1e-08,pass,True,gr_safe_lcdm_benchmark,False
-earth_orbit,Earth orbit regime,-62637000.0,1e-10,,-1.596500470967639e-18,1e-08,pass,True,gr_safe_lcdm_benchmark,False
-gps_weak_field_clock,GPS weak-field clock regime,-58000000.0,8e-11,,-1.379310344827586e-18,1e-08,pass,True,gr_safe_lcdm_benchmark,False
-light_bending_sun,light bending near Sun,-100000000.0,1e-12,,-1e-20,1e-09,pass,True,gr_safe_lcdm_benchmark,False
-shapiro_delay,Shapiro delay regime,-95000000.0,2e-12,,-2.105263157894737e-20,1e-09,pass,True,gr_safe_lcdm_benchmark,False
-lunar_laser_ranging,lunar laser ranging scale,-12000000.0,5e-13,,-4.166666666666667e-20,1e-08,pass,True,gr_safe_lcdm_benchmark,False
-binary_pulsar_weak_field,binary pulsar weak-field timing proxy,-5000000.0,-4.9999999999999996e-06,1e-12,1e-12,1e-07,pass,True,gr_safe_lcdm_benchmark,False

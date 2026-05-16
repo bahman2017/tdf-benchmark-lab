@@ -1,118 +1,216 @@
-# TDF Observational Calibration
+# TDF Benchmark Lab
 
-Before modifying this project, read [INSTRUCTIONS.md](./INSTRUCTIONS.md).
+A reproducible **benchmark and calibration suite** for testing the [Time Delay Field (TDF)](./INSTRUCTIONS.md) v0.8.1 framework against ΛCDM/GR recovery regimes, controlled stress tests, and (future) observational constraints.
 
-Numerical **testing and calibration framework** for the Time Delay Field (TDF) v0.8.1 phenomenological equations.
+**Repository:** [github.com/bahman2017/tdf-benchmark-lab](https://github.com/bahman2017/tdf-benchmark-lab)
 
-> **Warning:** Outputs are calibration diagnostics only. This project does **not** claim that TDF is validated. Labels distinguish synthetic validation, real-data calibration, passed/failed constraints, and not-yet-tested assumptions.
+| | |
+|---|---|
+| **Status** | Research benchmark scaffold |
+| **Validation** | Not observationally validated |
+| **Tests** | `pytest` suite (+ GitHub Actions on push) |
 
-## Current project mode: ΛCDM Compatibility and Recovery Testing
+Before contributing, read [INSTRUCTIONS.md](./INSTRUCTIONS.md).
 
-We are **not** using real observational data for calibration in the current phase.
+---
 
-Instead:
+## Scientific disclaimer
 
-- **ΛCDM / GR+Dark Matter** is used as a **teacher benchmark** in regimes where it already works well (solar system, exterior black-hole limits, NFW-like rotation surrogates, bounded redshift scaffolds).
-- TDF is tested on whether it can **recover or mimic** those successful effective behaviors in controlled, labeled benchmarks.
-- **Passing benchmark tests does not validate TDF** — it only checks compatibility with known successful phenomenology before we stress TDF in ΛCDM problem regimes or run real-sky calibration.
+This repository provides **calibration diagnostics** and **controlled benchmark tests** for a phenomenological TDF model. It does **not** constitute observational validation of TDF, does **not** prove TDF, and does **not** disprove ΛCDM or dark matter.
 
-Real SPARC / observational workflows are **postponed** until Phase 4 compatibility expansion is complete. See [docs/LCDM_COMPATIBILITY_STRATEGY.md](./docs/LCDM_COMPATIBILITY_STRATEGY.md) and [docs/ROADMAP.md](./docs/ROADMAP.md).
+Passing a benchmark means **compatibility or recovery in that controlled setting only**. Every generated report includes an explicit warning banner (e.g. `NOT REAL OBSERVATIONAL DATA`).
 
-## Purpose
+---
 
-- Implement the first weak-field rotation ansatz:  
-  `v_model²(r) = v_baryon²(r) + B·r/(r + r0)` with `τ̄_l(r) = A·log(1 + r/r0)` and `B = K_τ·A`.
-- Provide modular hooks for lensing, redshift, solar-system, and black-hole channels.
-- Run **Phase 1** synthetic rotation recovery tests and **ΛCDM compatibility benchmarks** (Phases 3B–3C, expanding in Phase 4) before real observational calibration (Phase 6).
+## What this repository does
+
+- Implements TDF v0.8.1 **phenomenological** equations in testable form (rotation, redshift formula, solar-system ε_τ, BH exterior ansatz).
+- Runs **synthetic and teacher-based** benchmarks where ΛCDM/GR+DM is already successful (NFW-like rotation, GR-safe caps, BH limits, redshift bounds).
+- Runs **stress tests** where ΛCDM is strained (core–cusp, rotation-curve diversity).
+- Compares **baryon-only**, **TDF simple**, **TDF core proxy** (stress diagnostic), and **NFW simple** models with BIC-aware reporting.
+- Provides a **pytest** suite and scripts that regenerate tables, reports, and figures under `outputs/`.
+
+---
+
+## What this repository does not claim
+
+- That TDF is correct in nature or validated on real galaxies.
+- That dark matter is disproven or unnecessary.
+- That SPARC or other catalogs are used for calibration in the current release (real data is **postponed** to Phase 6).
+- That black-hole formulas are full nonlinear GR solutions.
+
+---
+
+## Core equations tested
+
+**Rotation (TDF simple, unchanged in this repo):**
+
+```text
+v_TDF²(r) = v_baryon²(r) + B · r / (r + r0)
+τ̄_l(r) = A · log(1 + r/r0),   B = K_τ · A
+```
+
+**TDF core proxy (stress diagnostic only):**
+
+```text
+v_TDF_core²(r) = v_baryon²(r) + C · r² / (r² + rc_tau²)
+```
+
+**Redshift (formula):** `z_τ = K_τ · Δτ̄_l / c²`
+
+**Solar system:** `ε_τ = Φ_τ / Φ_b` (configured scaffold)
+
+**Black hole (ansatz):** `T_TDF = T_H · √(1 − (rc/rs)²)`, `r_nr = √(rs² − rc²)`
+
+See [docs/SCIENTIFIC_ASSUMPTIONS.md](./docs/SCIENTIFIC_ASSUMPTIONS.md).
+
+---
+
+## Implemented benchmark phases
+
+| Phase | Description |
+|-------|-------------|
+| 1 | Synthetic / demo rotation validation |
+| 2 | SPARC ingestion **scaffold** only (no auto-download) |
+| 3 | Baryon / TDF / NFW baseline comparison |
+| 3B | NFW surrogate recovery |
+| 3C | ΛCDM/GR combined benchmark scaffold |
+| 4A | Expanded NFW/ΛCDM rotation benchmark (10 cases) |
+| 4B | GR-safe local benchmark |
+| 4C | Black-hole exterior GR-limit benchmark |
+| 4D | Redshift / Doppler sanity benchmark |
+| 5A | Core–cusp stress test |
+| 5B | Rotation-curve diversity stress test |
+
+Details: [docs/TEST_PLAN.md](./docs/TEST_PLAN.md), [docs/BENCHMARK_MANIFEST.md](./docs/BENCHMARK_MANIFEST.md).
+
+---
 
 ## Installation
 
 ```bash
-cd tdf_observational_calibration
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+git clone https://github.com/bahman2017/tdf-benchmark-lab.git
+cd tdf-benchmark-lab
+python3.11 -m venv .venv
+source .venv/bin/activate    # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 pip install -e .
 ```
 
-## Rotation pipeline (Phase 1; Phase 2 scaffold; Phase 6 real data later)
+Requires **Python ≥ 3.10** (CI uses 3.11).
+
+---
+
+## Quick start
+
+```bash
+pytest -q
+python scripts/run_nfw_surrogate.py
+python scripts/run_core_cusp_stress.py
+```
+
+Outputs are written under `outputs/` (regenerated locally; not all files are committed — see [outputs/README.md](./outputs/README.md)).
+
+---
+
+## Running tests
 
 ```bash
 pytest
-python scripts/run_rotation.py            # synthetic or demo fixture by default
-# Real SPARC (Phase 6 only, after ΛCDM compatibility work):
-# python scripts/prepare_sparc_rotation.py   # user-supplied raw data in data/raw/
-# python scripts/run_rotation.py
+pytest -v tests/test_nfw_surrogate_expanded.py
 ```
 
-| Condition | Mode | Report banner |
-|-----------|------|----------------|
-| No `rotation.csv` | `synthetic_validation` | SYNTHETIC ONLY — NO REAL DATA USED |
-| CSV without real metadata | `demo_fixture_calibration` | DEMO FIXTURE DATA — NOT REAL SPARC |
-| CSV + `rotation_metadata.yaml` (real confirmed) | `real_data_calibration` | _(none)_ |
+---
 
-Outputs:
+## Running benchmark scripts
 
-- `outputs/tables/rotation_fit_summary.csv`
-- `outputs/reports/rotation_report.md` (data source, model, B, r0, metrics, warnings, limitations)
-- `outputs/figures/<galaxy_id>_rotation.png` (one per galaxy)
+| Script | Phase |
+|--------|-------|
+| `python scripts/run_rotation.py` | 1 / 3 — **synthetic or demo** unless real metadata |
+| `python scripts/run_nfw_surrogate.py` | 3B / 4A |
+| `python scripts/run_lcdm_benchmark.py` | 3C |
+| `python scripts/run_gr_safe_benchmark.py` | 4B |
+| `python scripts/run_black_hole_gr_benchmark.py` | 4C |
+| `python scripts/run_redshift_sanity_benchmark.py` | 4D |
+| `python scripts/run_core_cusp_stress.py` | 5A |
+| `python scripts/run_rotation_diversity_stress.py` | 5B |
 
-### Phase 2 — SPARC ingestion scaffold (not active calibration path)
+Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 
-Infrastructure exists for when **Phase 6 — Real observational calibration** opens. Until then, do not treat processed demo files as real SPARC. See `docs/DATA_REQUIREMENTS.md` for formats.
+---
 
-### Phase 3B–3C — ΛCDM compatibility benchmarks (current focus)
+## Output structure
 
-Tests whether TDF can mimic ΛCDM/GR+DM-like effective behavior — **not** real observations.
-
-```bash
-python scripts/run_nfw_surrogate.py
-python scripts/run_lcdm_benchmark.py
-python scripts/run_gr_safe_benchmark.py
-python scripts/run_black_hole_gr_benchmark.py
-python scripts/run_redshift_sanity_benchmark.py
-python scripts/run_core_cusp_stress.py
-python scripts/run_rotation_diversity_stress.py
+```text
+outputs/
+  README.md
+  tables/     # CSV summaries (generated)
+  reports/    # Markdown reports with warning banners
+  figures/    # PNG plots (generated)
 ```
 
-Banners: **ΛCDM/NFW BENCHMARK — NOT REAL OBSERVATIONAL DATA** · **ΛCDM BENCHMARK RECOVERY — NOT REAL OBSERVATIONAL DATA**
+Optional paper snapshots: [docs/results_snapshot/](./docs/results_snapshot/).
 
-## Full pipeline (partial)
+---
 
-```bash
-python scripts/run_full_pipeline.py
+## Data policy
+
+| Path | Policy |
+|------|--------|
+| `data/raw/` | User-supplied only; **not** in Git |
+| `data/processed/` | Demo fixture may exist locally; **not** shipped as real SPARC |
+| `data/synthetic/` | Synthetic generators / notes |
+
+No automatic download. No fake “real observational” labels. See [docs/DATA_REQUIREMENTS.md](./docs/DATA_REQUIREMENTS.md).
+
+---
+
+## Reproducibility
+
+1. Clone repo and install (above).
+2. Run `pytest`.
+3. Run benchmark scripts (see [docs/BENCHMARK_MANIFEST.md](./docs/BENCHMARK_MANIFEST.md)).
+4. Compare regenerated CSV/MD under `outputs/` with appendix tables.
+
+Record `git rev-parse HEAD` and Python version when citing results.
+
+---
+
+## How to cite
+
+See [CITATION.cff](./CITATION.cff). If you use this benchmark suite, cite the associated TDF paper/preprint when available.
+
+```bibtex
+@software{tdf_benchmark_lab,
+  author = {Masarrat, Bahman},
+  title = {TDF Benchmark Lab: Controlled ΛCDM/GR Recovery and Stress Tests},
+  year = {2026},
+  url = {https://github.com/bahman2017/tdf-benchmark-lab}
+}
 ```
 
-Runs rotation synthetic test, solar-system demo constraints, and black-hole summary table. Lensing/redshift remain placeholders.
+---
 
-## Tests
+## Roadmap
 
-```bash
-pytest -v
+Implemented phases 1–5B; real observational calibration (Phase 6) and lensing/redshift pipelines deferred.
+
+See [docs/ROADMAP.md](./docs/ROADMAP.md) and [docs/LCDM_COMPATIBILITY_STRATEGY.md](./docs/LCDM_COMPATIBILITY_STRATEGY.md).
+
+---
+
+## License
+
+[MIT License](./LICENSE) — Copyright (c) 2026 Bahman Masarrat.
+
+---
+
+## Repository layout
+
+```text
+tdf-benchmark-lab/
+  README.md  INSTRUCTIONS.md  LICENSE  CITATION.cff  CHANGELOG.md
+  pyproject.toml  requirements.txt  .gitignore
+  configs/  data/  docs/  scripts/  src/tdf_obs/  tests/  outputs/
+  .github/workflows/tests.yml
 ```
-
-## Project layout
-
-See repository tree: `src/tdf_obs/` (models, fitting, validation, plotting, pipelines), `configs/`, `docs/`, `scripts/`, `tests/`.
-
-## Scientific status
-
-| Channel        | Status (v0.1)        |
-|----------------|----------------------|
-| Rotation synth | Implemented (Phase 1)|
-| SPARC ingest   | Scaffold only (Phase 2); real calibration Phase 6 |
-| Baseline compare | Implemented (Phase 3: baryon / TDF / NFW) |
-| NFW surrogate    | Implemented (Phase 3B: teacher/student) |
-| ΛCDM benchmarks  | Implemented scaffold (Phase 3C) |
-| ΛCDM NFW rotation (4A) | Implemented (10 benchmark cases) |
-| GR-safe local (4B) | Implemented (7 benchmark cases) |
-| BH exterior GR-limit (4C) | Implemented (q sweep) |
-| Redshift sanity (4D) | Implemented (7 benchmark cases) |
-| Core–cusp stress (5A) | Implemented (8 synthetic cases) |
-| Rotation diversity (5B) | Implemented (10 synthetic cases) |
-| Lensing        | Not implemented      |
-| Redshift       | Partial formula only |
-| Solar system   | Basic epsilon checks |
-| Black hole     | Formula demos        |
-
-See `docs/LCDM_COMPATIBILITY_STRATEGY.md`, `docs/TEST_PLAN.md`, `docs/ROADMAP.md`, and `docs/SCIENTIFIC_ASSUMPTIONS.md`.

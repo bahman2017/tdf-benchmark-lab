@@ -1,11 +1,33 @@
 .venv/
-__pycache__/
-*.py[cod]
-*$py.class
 .pytest_cache/
-.mplconfig/
+__pycache__/
+*.pyc
 .DS_Store
-*.egg-info/
-dist/
+.env
+.env.*
+.ipynb_checkpoints/
+.cache/
+.mplconfig/
 build/
-.eggs/
+dist/
+*.egg-info/
+
+# Large / raw observational inputs (not shipped with repo)
+data/raw/*
+!data/raw/README.md
+data/processed/*
+!data/processed/README.md
+data/synthetic/*
+!data/synthetic/README.md
+
+# Generated benchmark outputs (regenerate with scripts/)
+outputs/figures/*
+!outputs/figures/.gitkeep
+outputs/tables/*
+!outputs/tables/.gitkeep
+outputs/reports/*
+!outputs/reports/.gitkeep
+!outputs/README.md
+
+# Selected frozen benchmark outputs for a paper may be committed under:
+# docs/results_snapshot/  (see docs/results_snapshot/README.md)
