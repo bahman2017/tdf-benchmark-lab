@@ -83,6 +83,9 @@ See [docs/SCIENTIFIC_ASSUMPTIONS.md](./docs/SCIENTIFIC_ASSUMPTIONS.md).
 | 5B | Rotation-curve diversity stress test |
 | 5C | Same-τ multi-observable consistency (rotation → lensing/redshift proxies) |
 | 5D | Covariant action consistency checks (NFW surrogate TDF fits) |
+| 5E | CMB acoustic-scale compatibility (ΛCDM teacher background) |
+| 5F | CMB-safe Hubble tension (late-time ε_τ background) |
+| 5G | BAO/SNe late-time distance consistency |
 
 Details: [docs/TEST_PLAN.md](./docs/TEST_PLAN.md), [docs/BENCHMARK_MANIFEST.md](./docs/BENCHMARK_MANIFEST.md).
 
@@ -138,6 +141,9 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | `python scripts/run_rotation_diversity_stress.py` | 5B |
 | `python scripts/run_same_tau_consistency.py` | 5C |
 | `python scripts/run_covariant_action_checks.py` | 5D |
+| `python scripts/run_cmb_acoustic_benchmark.py` | 5E |
+| `python scripts/run_hubble_tension_benchmark.py` | 5F |
+| `python scripts/run_bao_sne_distance_benchmark.py` | 5G |
 
 Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 

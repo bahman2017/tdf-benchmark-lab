@@ -19,6 +19,9 @@ python scripts/run_core_cusp_stress.py
 python scripts/run_rotation_diversity_stress.py
 python scripts/run_same_tau_consistency.py
 python scripts/run_covariant_action_checks.py
+python scripts/run_cmb_acoustic_benchmark.py
+python scripts/run_hubble_tension_benchmark.py
+python scripts/run_bao_sne_distance_benchmark.py
 python scripts/run_rotation.py   # synthetic/demo unless real metadata confirmed
 ```
 

@@ -205,7 +205,10 @@ Phase 4 (compatibility recovery) is complete; stress tests now examine problem r
 | **5B** | Rotation-curve diversity stress test | ✅ implemented |
 | **5C** | Same-τ multi-observable consistency | ✅ implemented |
 | **5D** | Covariant action consistency checks | ✅ implemented |
-| **5E+** | Hubble tension, missing satellites, etc. | not_yet_tested |
+| **5E** | CMB acoustic-scale compatibility | ✅ implemented |
+| **5F** | CMB-safe Hubble tension benchmark | ✅ implemented |
+| **5G** | BAO/SNe distance consistency | ✅ implemented |
+| **6+** | Missing satellites, real data, etc. | not_yet_tested |
 
 ### Phase 5B — Rotation-curve diversity stress test ✅ (implemented)
 
@@ -250,6 +253,51 @@ effective-density finiteness.
 **Outputs:** `covariant_action_checks_summary.csv`, `covariant_action_checks_report.md`
 
 **Status:** implemented. **Not** a proof of the covariant action; **not** observational validation.
+
+### Phase 5E — CMB acoustic-scale compatibility benchmark ✅ (implemented)
+
+**Objective:** Compare ΛCDM teacher background to TDF student `H_TDF² = H_ΛCDM² [1+ε_τ(z)]` on
+sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s`.
+
+**Banner:** `CMB ACOUSTIC SCALE BENCHMARK — NOT REAL OBSERVATIONAL DATA`
+
+**Commands:** `python scripts/run_cmb_acoustic_benchmark.py`
+
+**Outputs:** `cmb_acoustic_benchmark_summary.csv`, `cmb_acoustic_benchmark_report.md`,
+`cmb_acoustic_epsilon_tau_cases.png`
+
+**Pass rule:** relative errors on H(z_*), r_s, D_M, ℓ_A each &lt; 1% (configurable).
+
+**Status:** implemented (8 cases, including intentional fails). **Not** Planck/ACT/SPT validation.
+
+### Phase 5F — CMB-safe Hubble tension benchmark ✅ (implemented)
+
+**Objective:** Late-time `ε_τ(z)` shifts low-z H(z)/H₀ while preserving CMB acoustic proxies (r_s, D_M, ℓ_A, H(z_*)).
+
+**Banner:** `CMB-SAFE HUBBLE TENSION BENCHMARK — NOT REAL OBSERVATIONAL DATA`
+
+**Commands:** `python scripts/run_hubble_tension_benchmark.py`
+
+**Outputs:** `hubble_tension_benchmark_summary.csv`, `hubble_tension_benchmark_report.md`,
+`hubble_tension_epsilon_tau_cases.png`, `hubble_tension_H_ratio_cases.png`
+
+**Overall success:** CMB-safe (all errors &lt; 1%) **and** |H₀ shift| in [2%, 10%].
+
+**Status:** implemented. **Does not** solve the Hubble tension.
+
+### Phase 5G — BAO/SNe late-time distance consistency ✅ (implemented)
+
+**Objective:** Late-time `ε_τ(z)` must preserve SNe-like `D_L` and BAO-like `D_M`, `D_V`, `H(z)` proxies vs ΛCDM teacher.
+
+**Banner:** `BAO/SNe DISTANCE CONSISTENCY BENCHMARK — NOT REAL OBSERVATIONAL DATA`
+
+**Commands:** `python scripts/run_bao_sne_distance_benchmark.py`
+
+**Outputs:** `bao_sne_distance_benchmark_summary.csv`, `bao_sne_distance_benchmark_report.md`, `bao_sne_distance_*.png`
+
+**Overall success:** distance-safe (ΔD_L, ΔD_M, ΔD_V, ΔH within thresholds) **and** |H₀ shift| in [2%, 10%].
+
+**Status:** implemented. **Not** BAO/SNe likelihood validation.
 
 ---
 

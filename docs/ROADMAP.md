@@ -23,6 +23,9 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 | **5B** | Rotation-curve diversity stress test (10 shapes) | ✅ |
 | **5C** | Same-τ multi-observable consistency (rotation / lensing / redshift proxies) | ✅ |
 | **5D** | Covariant action consistency checks on NFW surrogate fits | ✅ |
+| **5E** | CMB acoustic-scale compatibility (ΛCDM teacher, ε_τ background) | ✅ |
+| **5F** | CMB-safe Hubble tension (late-time ε_τ, background proxies) | ✅ |
+| **5G** | BAO/SNe late-time distance consistency | ✅ |
 
 Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
 
@@ -33,8 +36,7 @@ Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPEND
 | Phase | Description | Status |
 |-------|-------------|--------|
 | **5B.1** | Failure-mode refinement (declining outer, inner-cusp/outer-flat teachers) | Planned |
-| **5E** | Hubble-tension style expansion benchmark (phenomenological) | Planned |
-| **5F** | Missing-satellites / small-scale suppression scaffold | Planned |
+| **5H** | Missing-satellites / small-scale suppression scaffold | Planned |
 | **6** | Real observational calibration (SPARC etc.) — **postponed** | Deferred |
 | **7+** | Lensing consistency; redshift vs kinematics; solar-system ephemeris; BH observational constraints | Future |
 
