@@ -26,8 +26,25 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 | **5E** | CMB acoustic-scale compatibility (ΛCDM teacher, ε_τ background) | ✅ |
 | **5F** | CMB-safe Hubble tension (late-time ε_τ, background proxies) | ✅ |
 | **5G** | BAO/SNe late-time distance consistency | ✅ |
+| **6A** | Schrödinger-from-TDF action benchmark (phase-density action → QM hydrodynamics) | ✅ |
 
 Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
+
+---
+
+## v0.10.0 — Microscopic quantum limit of TDF
+
+**Goal:** Move from macroscopic benchmark compatibility toward a **microscopic quantum derivation** — without claiming full quantum gravity.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6A** | Schrödinger-from-TDF action benchmark (ρ, τ phase-density action; 1D numerical consistency) | ✅ |
+| **6B+** | Klein–Gordon / Dirac limits, spinors | Planned |
+| **6C+** | Entanglement, decoherence, measurement | Planned |
+
+**Phase 6A** does **not** modify rotation, cosmology, or NFW equations. See [quantum_limit/SCHRODINGER_DERIVATION.md](./quantum_limit/SCHRODINGER_DERIVATION.md).
+
+Command: `python scripts/run_schrodinger_from_tdf.py`
 
 ---
 

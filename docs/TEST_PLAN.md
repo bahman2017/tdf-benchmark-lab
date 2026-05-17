@@ -301,6 +301,32 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 
 ---
 
+## Phase 6A — Schrödinger-from-TDF action benchmark ✅ (implemented)
+
+**Objective:** Numerically verify that the TDF **phase-density action** (ρ, τ with ψ = √ρ exp(-iτ)) reproduces continuity, quantum Hamilton–Jacobi, and Schrödinger residuals in controlled 1D cases.
+
+**Banner:** `SCHRÖDINGER-FROM-TDF ACTION BENCHMARK — NOT FULL QUANTUM VALIDATION`
+
+**Commands:** `python scripts/run_schrodinger_from_tdf.py`
+
+**Module:** `src/tdf_obs/validation/schrodinger_from_tdf.py`
+
+**Derivation note:** [docs/quantum_limit/SCHRODINGER_DERIVATION.md](./quantum_limit/SCHRODINGER_DERIVATION.md)
+
+**Cases:**
+
+1. Free plane wave — ρ = 1, τ = ωt − kx, ω = ℏk²/(2m)
+2. Gaussian snapshot — smooth ρ, τ = kx (static slice)
+3. Harmonic oscillator ground state — stationary eigenvalue residual
+
+**Outputs:** `schrodinger_from_tdf_summary.csv`, `schrodinger_from_tdf_report.md`, `schrodinger_plane_wave_residual.png`, `schrodinger_gaussian_residual.png`, `schrodinger_harmonic_ground_state.png`
+
+**Tests:** `pytest tests/test_schrodinger_from_tdf.py`
+
+**Status:** implemented. **Not** full quantum gravity; no Dirac/spin/entanglement/decoherence.
+
+---
+
 ## Phase 6 — Real observational calibration *(postponed)*
 
 > ⚠️ **Real observational calibration is intentionally postponed until ΛCDM compatibility tests (Phase 4) are completed.**

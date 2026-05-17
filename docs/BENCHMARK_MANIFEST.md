@@ -18,6 +18,7 @@ Reproducibility index for all implemented benchmark pipelines.
 | CMB acoustic scale (5E) | `scripts/run_cmb_acoustic_benchmark.py` | `outputs/tables/cmb_acoustic_benchmark_summary.csv` | `outputs/reports/cmb_acoustic_benchmark_report.md` | `outputs/figures/cmb_acoustic_epsilon_tau_cases.png` | ✅ Implemented |
 | CMB-safe Hubble (5F) | `scripts/run_hubble_tension_benchmark.py` | `outputs/tables/hubble_tension_benchmark_summary.csv` | `outputs/reports/hubble_tension_benchmark_report.md` | `outputs/figures/hubble_tension_*.png` | ✅ Implemented |
 | BAO/SNe distance (5G) | `scripts/run_bao_sne_distance_benchmark.py` | `outputs/tables/bao_sne_distance_benchmark_summary.csv` | `outputs/reports/bao_sne_distance_benchmark_report.md` | `outputs/figures/bao_sne_distance_*.png` | ✅ Implemented |
+| Schrödinger-from-TDF (6A) | `scripts/run_schrodinger_from_tdf.py` | `outputs/tables/schrodinger_from_tdf_summary.csv` | `outputs/reports/schrodinger_from_tdf_report.md` | `outputs/figures/schrodinger_*_residual.png` | ✅ Implemented |
 
 ## Regenerate all primary benchmarks
 
@@ -36,6 +37,7 @@ python scripts/run_covariant_action_checks.py
 python scripts/run_cmb_acoustic_benchmark.py
 python scripts/run_hubble_tension_benchmark.py
 python scripts/run_bao_sne_distance_benchmark.py
+python scripts/run_schrodinger_from_tdf.py
 ```
 
 See [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md) for appendix wording and per-phase notes.
