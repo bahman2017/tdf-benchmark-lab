@@ -1138,3 +1138,31 @@ How can we make TDF look correct?
 ```
 
 The goal is scientific honesty, reproducibility, and falsifiability.
+
+---
+
+## 25. Continuous Documentation Rule
+
+Every time a **new feature, model, script, or benchmark phase** is added to this repository, the implementing agent **must** update the following **before concluding the task**:
+
+1. **`CHANGELOG.md`** (repository root) — dated entry with version label, files touched, and scientific scope (what is **not** claimed).
+2. **`docs/ROADMAP.md`** — phase status, commands, and controlled claims; mark completed milestones explicitly.
+3. **`docs/TEST_PLAN.md`** — test objective, commands, expected outputs, banners, and pass/fail meaning.
+
+When applicable, also update:
+
+- **`docs/BENCHMARK_MANIFEST.md`** — script path, output tables/reports/figures.
+- **`README.md`** — one-line command in the benchmark table.
+
+**Requirements:**
+
+- Use the same **non-overclaim** language as §4 (no “proof”, “validated”, “dark matter disproven”, etc.).
+- Include the standard report warning where results are written:
+
+  ```text
+  These results are calibration diagnostics for a phenomenological TDF model. They do not constitute observational validation of TDF unless all required multi-channel constraints are passed.
+  ```
+
+- Do **not** skip documentation updates because tests pass; reviewers use these files for traceability.
+
+Failure to update `CHANGELOG.md`, `ROADMAP.md`, and `TEST_PLAN.md` is an incomplete task.

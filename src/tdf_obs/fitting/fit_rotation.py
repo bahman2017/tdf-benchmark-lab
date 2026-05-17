@@ -17,11 +17,18 @@ from tdf_obs.fitting.metrics import (
 )
 from tdf_obs.io.schemas import RotationCurveData
 from tdf_obs.models.dark_matter import v2_nfw_simple, v_nfw_simple
-from tdf_obs.models.rotation import baryon_only_model, v2_tdf_simple, v_tdf_simple
+from tdf_obs.models.rotation import (
+    baryon_only_model,
+    v2_tdf_kessence,
+    v2_tdf_simple,
+    v_tdf_kessence,
+    v_tdf_simple,
+)
 
 N_PARAMS_BARYON = 0
 N_PARAMS_TDF = 2
 N_PARAMS_NFW = 2
+N_PARAMS_KESSENCE = 1
 
 
 @dataclass
@@ -76,6 +83,22 @@ class RotationFitResult:
     @property
     def improvement_percent(self) -> float:
         return self.tdf_vs_baryon_improvement_percent
+
+
+@dataclass
+class KessenceFitResult:
+    """Single-galaxy fit for the TDF K-essence rotation candidate."""
+
+    galaxy_id: str
+    a0: float
+    mse: float
+    chi2: float
+    chi2_reduced: float
+    aic: float
+    bic: float
+    success: bool
+    data_mode: str
+    warnings: list[str] = field(default_factory=list)
 
 
 def _fit_tdf_params(
@@ -165,6 +188,76 @@ def _model_metrics(
         reduced_chi_square(c2, n, n_params),
         aic(c2, n_params),
         bic(c2, n, n_params),
+    )
+
+
+def fit_kessence_galaxy_rotation(data: RotationCurveData) -> KessenceFitResult:
+    """
+    Fit the TDF non-linear K-essence effective limit with one parameter a0 > 0.
+
+    Uses scipy.optimize.curve_fit in v^2 space.
+    """
+    r = np.asarray(data.r_kpc, dtype=float)
+    v_obs = np.asarray(data.v_obs, dtype=float)
+    v_err = np.maximum(np.asarray(data.v_err, dtype=float), 1e-3)
+    v_baryon = np.asarray(data.v_baryon, dtype=float)
+    n = len(v_obs)
+
+    warnings: list[str] = []
+    v2_obs = v_obs**2
+    v2_err = np.maximum(2.0 * v_obs * v_err, 1.0)
+
+    def model_v2(r_fit: np.ndarray, a0: float) -> np.ndarray:
+        return v2_tdf_kessence(r_fit, v_baryon, a0)
+
+    v2_b = v_baryon**2
+    excess = max(float(v2_obs[-1] - v2_b[-1]), 1.0)
+    vb = max(float(v_baryon[-1]), 1.0)
+    rout = max(float(r[-1]), 0.1)
+    a0_guess = (excess / vb) ** 2 / rout
+    p0 = (max(a0_guess, 1.0),)
+    bounds = ([1e-12], [1e8])
+
+    try:
+        popt, _ = curve_fit(
+            model_v2,
+            r,
+            v2_obs,
+            p0=p0,
+            bounds=bounds,
+            sigma=v2_err,
+            absolute_sigma=True,
+            maxfev=20_000,
+        )
+        a0 = float(popt[0])
+        v_pred = v_tdf_kessence(r, v_baryon, a0)
+        success = np.isfinite(a0)
+    except Exception as exc:
+        warnings.append(f"K-essence curve_fit failed: {exc}")
+        a0 = float("nan")
+        v_pred = baryon_only_model(v_baryon)
+        success = False
+
+    mse_val, chi2_val, chi2_red, aic_val, bic_val = _model_metrics(
+        v_obs,
+        v_pred,
+        v_err,
+        N_PARAMS_KESSENCE,
+    )
+    data_mode = str(
+        data.metadata.get("dataset_mode", data.metadata.get("data_mode", "unknown")),
+    )
+    return KessenceFitResult(
+        galaxy_id=data.galaxy_id,
+        a0=a0,
+        mse=mse_val,
+        chi2=chi2_val,
+        chi2_reduced=chi2_red,
+        aic=aic_val,
+        bic=bic_val,
+        success=success,
+        data_mode=data_mode,
+        warnings=warnings,
     )
 
 

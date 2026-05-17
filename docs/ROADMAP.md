@@ -4,6 +4,16 @@
 
 This roadmap tracks **benchmark and calibration** work only. Passing a phase does **not** mean TDF is observationally validated.
 
+### Galaxy-scale rotation models (current)
+
+| Model | Parameters | Role |
+|-------|------------|------|
+| **Baryon-only** | 0 | Baseline (no τ correction) |
+| **TDF simple** | `B`, `r0` | Weak-field ansatz \(v^2 = v_b^2 + B r/(r+r_0)\) |
+| **TDF K-essence** | `a0` | Non-linear Horndeski **effective** limit \(v^2 = v_b^2 + v_b\sqrt{a_0 r}\) |
+
+Phase 3 batch fitting also compares **NFW simple** \((V_{h}^2, r_s)\) as a ΛCDM/GR+DM phenomenological baseline. K-essence is a **candidate** TDF extension, not a replacement for the simple ansatz or for full covariant Horndeski theory.
+
 ---
 
 ## Implemented
@@ -12,7 +22,8 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 |-------|-----------|--------|
 | **1** | Synthetic / demo rotation validation | ✅ |
 | **2** | SPARC ingestion **scaffold** (no auto-download; no fake real labels) | ✅ |
-| **3** | Baryon / TDF / NFW baseline comparison (BIC) | ✅ |
+| **3** | Baryon / TDF-simple / NFW baseline comparison (BIC) | ✅ |
+| **3K** | K-essence non-linear effective rotation limit (`a0`; vs baryon & TDF-simple) | ✅ |
 | **3B** | NFW surrogate teacher/student recovery | ✅ |
 | **3C** | ΛCDM/GR combined benchmark scaffold (solar, BH, redshift) | ✅ |
 | **4A** | Expanded NFW/ΛCDM rotation benchmark (10 cases) | ✅ |
@@ -30,8 +41,28 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 | **6B** | Dirac / spinor limit (Clifford, flat Dirac, tetrad, τ-momentum mass ladder) | ✅ |
 | **6C** | Entanglement from configuration-space τ (CHSH, concurrence, no-signaling) | ✅ |
 | **6D** | Decoherence from τ-variance (branch coherence suppression) | ✅ |
+| **6E** | Classical metric emergence from τ averaging | ✅ |
+| **6F** | Born-rule probability emergence proxy | ✅ |
+| **6G** | Unified microscopic quantum consistency matrix | ✅ |
+| **6H** | Muon g-2 / precision QED coupling phenomenology | ✅ |
 
 Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
+
+---
+
+## v0.9.0 — K-essence non-linear effective rotation limit ✅ (completed)
+
+**Goal:** Add a **phenomenological** galaxy-scale rotation candidate derived from the TDF non-linear Horndeski K-essence limit, and compare it to baryon-only and TDF-simple fits using standard information criteria — **without** claiming dark matter is excluded or that TDF is observationally validated.
+
+| Item | Status |
+|------|--------|
+| `v2_tdf_kessence` / `v_tdf_kessence` in `models/rotation.py` | ✅ |
+| `fit_kessence_galaxy_rotation` (`a0 > 0`) | ✅ |
+| `run_kessence_rotation_benchmark.py` (MSE, χ², BIC; report + figure) | ✅ |
+
+**Effective limit (calibration form):** \(v^2(r) = v_b^2(r) + v_b(r)\sqrt{a_0 r}\), with \(a_0\) in \((\mathrm{km/s})^2/\mathrm{kpc}\).
+
+Command: `python scripts/run_kessence_rotation_benchmark.py`
 
 ---
 
@@ -86,6 +117,7 @@ Command: `python scripts/run_entanglement_tau_geometry.py`
 | **6E** | Classical metric emergence / objective-collapse proxy (τ averaging → g̃) | ✅ |
 | **6F** | Born-rule / probability emergence proxy (ρ_i → P_i, χ² rule comparison) | ✅ |
 | **6G** | Unified microscopic quantum consistency matrix (6A–6F integration) | ✅ |
+| **6H** | Muon g-2 anomaly / precision QED coupling proxy (ε_τ → Δa_μ) | ✅ |
 | **7+** | 5D action derivation; full QG / measurement theory | Planned |
 
 Commands: `python scripts/run_unified_microscopic_quantum_limit.py` (plus individual 6A–6F scripts)
@@ -126,7 +158,19 @@ Command: `python scripts/run_born_rule_probability.py`
 
 Command: `python scripts/run_unified_microscopic_quantum_limit.py`
 
-**Next (v0.17.0):** Derive microscopic action more deeply from 5D geometry rather than adding proxy tests.
+**Next (v0.18.0+):** Derive microscopic action more deeply from 5D geometry rather than adding further proxy tests.
+
+---
+
+## v0.17.0 — Muon g-2 anomaly / precision QED benchmark (Phase 6H) ✅ (completed)
+
+**Goal:** Test whether sub-Compton **τ-phase geometric variance** ε_τ = (σ_τ/ℓ_τ)² can produce a muon **(g−2)** shift Δa_μ = (α/2π)ε_τ at the order of magnitude of the experimental anomaly — **without** claiming a full QFT derivation.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6H** | Muon g-2 phenomenological QED coupling (α_eff proxy, Compton-scale ℓ_τ) | ✅ |
+
+Command: `python scripts/run_muon_g2_anomaly.py`
 
 ---
 

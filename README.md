@@ -132,6 +132,7 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | Script | Phase |
 |--------|-------|
 | `python scripts/run_rotation.py` | 1 / 3 — **synthetic or demo** unless real metadata |
+| `python scripts/run_kessence_rotation_benchmark.py` | 3K — baryon vs TDF-simple vs TDF K-essence (`a0`) |
 | `python scripts/run_nfw_surrogate.py` | 3B / 4A |
 | `python scripts/run_lcdm_benchmark.py` | 3C |
 | `python scripts/run_gr_safe_benchmark.py` | 4B |
@@ -151,6 +152,7 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | `python scripts/run_classical_metric_emergence.py` | 6E |
 | `python scripts/run_born_rule_probability.py` | 6F |
 | `python scripts/run_unified_microscopic_quantum_limit.py` | 6G |
+| `python scripts/run_muon_g2_anomaly.py` | 6H — μon (g−2) / ε_τ phenomenology |
 
 Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 

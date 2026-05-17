@@ -66,6 +66,39 @@ Selection by **BIC** (chi² proxy); report warns that lower MSE alone is insuffi
 
 ---
 
+## Phase 3K — K-essence rotation calibration ✅ (implemented)
+
+**Objective:** Compare three TDF-relevant rotation descriptions on one galaxy curve:
+
+1. **Baryon-only** (0 parameters)
+2. **TDF simple** `(B, r0)` — 2 parameters (weak-field ansatz)
+3. **TDF K-essence** `(a0)` — 1 parameter (non-linear effective limit)
+
+**Model (candidate, not full covariant Horndeski derivation):**
+
+```text
+v^2(r) = v_b^2(r) + v_b(r) * sqrt(a0 * r)
+```
+
+**Method:**
+
+- Fit `a0` with `fit_kessence_galaxy_rotation` (`scipy.optimize.curve_fit`, `a0 > 0`).
+- Fit TDF simple via existing `fit_single_galaxy_rotation` path.
+- Rank models with **MSE**, **χ²**, and **BIC** (same metrics as Phase 3).
+- Synthetic K-essence injection available for recovery checks; otherwise uses `data/processed/rotation.csv` when present (demo fixture labeled accordingly).
+
+**Banner:** standard calibration diagnostic from `INSTRUCTIONS.md` (not observational validation).
+
+**Commands:** `python scripts/run_kessence_rotation_benchmark.py`
+
+**Tests:** `pytest tests/test_rotation_model.py`, `pytest tests/test_kessence_rotation_benchmark.py`
+
+**Outputs:** `kessence_rotation_benchmark_summary.csv`, `kessence_rotation_benchmark_report.md`, `<galaxy_id>_kessence_rotation_benchmark.png`
+
+**Status:** implemented. Phenomenological fit comparison only; does not prove MOND, exclude dark matter, or validate TDF on real sky data.
+
+---
+
 ## Phase 3B — NFW surrogate recovery ✅ (implemented)
 
 **Question:** Can TDF reproduce GR+DM/NFW-like phenomenology in controlled benchmarks?
@@ -443,7 +476,41 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 
 **Tests:** `pytest tests/test_unified_microscopic_quantum_limit.py`
 
-**Status:** implemented. **Not** quantum-gravity proof; recommends v0.17.0 focus on 5D action derivation.
+**Status:** implemented. **Not** quantum-gravity proof.
+
+---
+
+## Phase 6H — Muon g-2 anomaly / precision QED benchmark ✅ (implemented)
+
+**Objective:** Phenomenological check whether τ-phase geometric variance ε_τ = (σ_τ/ℓ_τ)² produces a muon **(g−2)** shift Δa_μ = (α/2π)ε_τ consistent with the experimental anomaly Δa_μ^exp ≈ 2.51×10⁻¹⁰ (Fermilab/BNL consensus central value for this benchmark).
+
+**Equations (proxy, not full QFT):**
+
+```text
+ε_τ = (σ_τ / ℓ_τ)²
+α_eff = α (1 + ε_τ)   [order-of-magnitude narrative]
+Δa_μ = (α / 2π) ε_τ
+```
+
+**Method:**
+
+1. Verify reference point ε_τ ≈ 2.16×10⁻⁷ reproduces Δa_μ within tolerance.
+2. Set ℓ_τ to the muon Compton wavelength; infer σ_τ = ℓ_τ √ε_τ for the required ε_τ.
+3. Sweep ε_τ (log scale) and mark the experimental 1σ band on Δa_μ.
+
+**Banner:** `MUON G-2 ANOMALY BENCHMARK — NOT FULL QFT DERIVATION OF (g-2)` plus standard calibration diagnostic from `INSTRUCTIONS.md`.
+
+**Interpretation (required in report):** geometric phase fluctuations could **in principle** couple to QED observables at order-of-magnitude level; **not** a proof of the anomaly's origin.
+
+**Commands:** `python scripts/run_muon_g2_anomaly.py`
+
+**Module:** `src/tdf_obs/validation/muon_g2_anomaly.py`
+
+**Tests:** `pytest tests/test_muon_g2_anomaly.py`
+
+**Outputs:** `muon_g2_anomaly_summary.csv`, `muon_g2_anomaly_report.md`, `muon_g2_epsilon_sweep.png`
+
+**Status:** implemented. **Not** precision QED validation of TDF; **not** a replacement for SM calculations.
 
 ---
 
