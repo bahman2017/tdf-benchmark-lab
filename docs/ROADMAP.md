@@ -28,6 +28,7 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 | **5G** | BAO/SNe late-time distance consistency | ✅ |
 | **6A** | Schrödinger-from-TDF action benchmark (phase-density action → QM hydrodynamics) | ✅ |
 | **6B** | Dirac / spinor limit (Clifford, flat Dirac, tetrad, τ-momentum mass ladder) | ✅ |
+| **6C** | Entanglement from configuration-space τ (CHSH, concurrence, no-signaling) | ✅ |
 
 Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
 
@@ -40,7 +41,7 @@ Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPEND
 | Phase | Milestone | Status |
 |-------|-----------|--------|
 | **6A** | Schrödinger-from-TDF action benchmark (ρ, τ phase-density action; 1D numerical consistency) | ✅ |
-| **6C+** | Entanglement, decoherence, measurement | Planned |
+| **6D+** | Decoherence, measurement | Planned |
 
 **Phase 6A** does **not** modify rotation, cosmology, or NFW equations. See [quantum_limit/SCHRODINGER_DERIVATION.md](./quantum_limit/SCHRODINGER_DERIVATION.md).
 
@@ -55,9 +56,22 @@ Command: `python scripts/run_schrodinger_from_tdf.py`
 | Phase | Milestone | Status |
 |-------|-----------|--------|
 | **6B** | Dirac / spinor limit benchmark (γ matrices, H(k), Ψ = √ρ e^{−iτ} χ, g̃, m = p_τ/c) | ✅ |
-| **6C+** | Entanglement, decoherence, measurement | Planned |
+| **6D+** | Decoherence, measurement | Planned |
 
 Command: `python scripts/run_dirac_spinor_limit.py`
+
+---
+
+## v0.12.0 — Entanglement / nonlocal correlations from TDF
+
+**Goal:** Test whether TDF can encode **entangled** correlations as nonseparable τ-phase geometry in configuration space — without claiming Bell resolution or superluminal signaling.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6C** | Entanglement / τ geometry (two-qubit, CHSH, concurrence, no-signaling) | ✅ |
+| **6D+** | Decoherence, measurement collapse | Planned |
+
+Command: `python scripts/run_entanglement_tau_geometry.py`
 
 ---
 

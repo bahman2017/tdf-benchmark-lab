@@ -20,6 +20,7 @@ Reproducibility index for all implemented benchmark pipelines.
 | BAO/SNe distance (5G) | `scripts/run_bao_sne_distance_benchmark.py` | `outputs/tables/bao_sne_distance_benchmark_summary.csv` | `outputs/reports/bao_sne_distance_benchmark_report.md` | `outputs/figures/bao_sne_distance_*.png` | ✅ Implemented |
 | Schrödinger-from-TDF (6A) | `scripts/run_schrodinger_from_tdf.py` | `outputs/tables/schrodinger_from_tdf_summary.csv` | `outputs/reports/schrodinger_from_tdf_report.md` | `outputs/figures/schrodinger_*_residual.png` | ✅ Implemented |
 | Dirac / spinor limit (6B) | `scripts/run_dirac_spinor_limit.py` | `outputs/tables/dirac_spinor_limit_summary.csv` | `outputs/reports/dirac_spinor_limit_report.md` | `outputs/figures/dirac_dispersion_relation.png`, `compact_tau_mass_ladder.png` | ✅ Implemented |
+| Entanglement / τ geometry (6C) | `scripts/run_entanglement_tau_geometry.py` | `outputs/tables/entanglement_tau_geometry_summary.csv` | `outputs/reports/entanglement_tau_geometry_report.md` | `outputs/figures/entanglement_*.png`, `tau_nonseparability_scores.png` | ✅ Implemented |
 
 ## Regenerate all primary benchmarks
 
@@ -40,6 +41,7 @@ python scripts/run_hubble_tension_benchmark.py
 python scripts/run_bao_sne_distance_benchmark.py
 python scripts/run_schrodinger_from_tdf.py
 python scripts/run_dirac_spinor_limit.py
+python scripts/run_entanglement_tau_geometry.py
 ```
 
 See [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md) for appendix wording and per-phase notes.

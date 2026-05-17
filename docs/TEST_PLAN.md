@@ -347,6 +347,26 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 
 ---
 
+## Phase 6C — Entanglement from configuration-space τ benchmark ✅ (implemented)
+
+**Objective:** Test whether **nonseparable configuration-space τ geometry** can represent entangled two-qubit states while preserving **no-signaling** and standard CHSH/Bell statistics.
+
+**Banner:** `ENTANGLEMENT / NONLOCAL CORRELATION BENCHMARK — NOT FULL BELL-THEOREM RESOLUTION`
+
+**Commands:** `python scripts/run_entanglement_tau_geometry.py`
+
+**Module:** `src/tdf_obs/validation/entanglement_tau_geometry.py`
+
+**Cases:** product control; Bell Φ⁺/Ψ⁻; partially entangled; random product; nonseparable τ demo.
+
+**Outputs:** `entanglement_tau_geometry_summary.csv`, `entanglement_tau_geometry_report.md`, `entanglement_chsh_values.png`, `entanglement_entropy_concurrence.png`, `tau_nonseparability_scores.png`
+
+**Tests:** `pytest tests/test_entanglement_tau_geometry.py`
+
+**Status:** implemented. **Not** Bell-theorem resolution; no decoherence or collapse.
+
+---
+
 ## Phase 6 — Real observational calibration *(postponed)*
 
 > ⚠️ **Real observational calibration is intentionally postponed until ΛCDM compatibility tests (Phase 4) are completed.**
