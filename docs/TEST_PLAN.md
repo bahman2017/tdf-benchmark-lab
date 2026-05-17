@@ -327,6 +327,26 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 
 ---
 
+## Phase 6B — Dirac / spinor limit benchmark ✅ (implemented)
+
+**Objective:** Check whether TDF admits a **covariant spinor** extension (Ψ = √ρ e^{−iτ} χ) compatible with the flat-space Dirac equation, Clifford algebra, disformal metric, and τ-momentum mass ladder.
+
+**Banner:** `DIRAC / SPINOR LIMIT BENCHMARK — NOT FULL FERMION UNIFICATION`
+
+**Commands:** `python scripts/run_dirac_spinor_limit.py`
+
+**Module:** `src/tdf_obs/validation/dirac_spinor_limit.py`
+
+**Cases:** Clifford algebra; flat dispersion; positive-energy plane wave; TDF spinor ansatz density; disformal metric + tetrad; compact τ mass ladder.
+
+**Outputs:** `dirac_spinor_limit_summary.csv`, `dirac_spinor_limit_report.md`, `dirac_dispersion_relation.png`, `compact_tau_mass_ladder.png`
+
+**Tests:** `pytest tests/test_dirac_spinor_limit.py`
+
+**Status:** implemented. **Not** SM unification; no gauge fields, entanglement, or decoherence.
+
+---
+
 ## Phase 6 — Real observational calibration *(postponed)*
 
 > ⚠️ **Real observational calibration is intentionally postponed until ΛCDM compatibility tests (Phase 4) are completed.**

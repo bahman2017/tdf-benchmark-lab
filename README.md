@@ -145,6 +145,7 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | `python scripts/run_hubble_tension_benchmark.py` | 5F |
 | `python scripts/run_bao_sne_distance_benchmark.py` | 5G |
 | `python scripts/run_schrodinger_from_tdf.py` | 6A |
+| `python scripts/run_dirac_spinor_limit.py` | 6B |
 
 Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 

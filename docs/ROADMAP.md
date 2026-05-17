@@ -27,6 +27,7 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 | **5F** | CMB-safe Hubble tension (late-time ε_τ, background proxies) | ✅ |
 | **5G** | BAO/SNe late-time distance consistency | ✅ |
 | **6A** | Schrödinger-from-TDF action benchmark (phase-density action → QM hydrodynamics) | ✅ |
+| **6B** | Dirac / spinor limit (Clifford, flat Dirac, tetrad, τ-momentum mass ladder) | ✅ |
 
 Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
 
@@ -39,12 +40,24 @@ Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPEND
 | Phase | Milestone | Status |
 |-------|-----------|--------|
 | **6A** | Schrödinger-from-TDF action benchmark (ρ, τ phase-density action; 1D numerical consistency) | ✅ |
-| **6B+** | Klein–Gordon / Dirac limits, spinors | Planned |
 | **6C+** | Entanglement, decoherence, measurement | Planned |
 
 **Phase 6A** does **not** modify rotation, cosmology, or NFW equations. See [quantum_limit/SCHRODINGER_DERIVATION.md](./quantum_limit/SCHRODINGER_DERIVATION.md).
 
 Command: `python scripts/run_schrodinger_from_tdf.py`
+
+---
+
+## v0.11.0 — Dirac / spinor limit of TDF
+
+**Goal:** Extend the microscopic quantum-limit program to **fermionic** degrees of freedom via spinors and tetrads — without claiming full fermion unification.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6B** | Dirac / spinor limit benchmark (γ matrices, H(k), Ψ = √ρ e^{−iτ} χ, g̃, m = p_τ/c) | ✅ |
+| **6C+** | Entanglement, decoherence, measurement | Planned |
+
+Command: `python scripts/run_dirac_spinor_limit.py`
 
 ---
 
