@@ -147,6 +147,9 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | `python scripts/run_schrodinger_from_tdf.py` | 6A |
 | `python scripts/run_dirac_spinor_limit.py` | 6B |
 | `python scripts/run_entanglement_tau_geometry.py` | 6C |
+| `python scripts/run_decoherence_tau_variance.py` | 6D |
+| `python scripts/run_classical_metric_emergence.py` | 6E |
+| `python scripts/run_born_rule_probability.py` | 6F |
 
 Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 

@@ -29,6 +29,7 @@ This roadmap tracks **benchmark and calibration** work only. Passing a phase doe
 | **6A** | Schrödinger-from-TDF action benchmark (phase-density action → QM hydrodynamics) | ✅ |
 | **6B** | Dirac / spinor limit (Clifford, flat Dirac, tetrad, τ-momentum mass ladder) | ✅ |
 | **6C** | Entanglement from configuration-space τ (CHSH, concurrence, no-signaling) | ✅ |
+| **6D** | Decoherence from τ-variance (branch coherence suppression) | ✅ |
 
 Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md), GitHub Actions `pytest` CI.
 
@@ -41,7 +42,7 @@ Supporting docs: [BENCHMARK_MANIFEST.md](./BENCHMARK_MANIFEST.md), [PAPER_APPEND
 | Phase | Milestone | Status |
 |-------|-----------|--------|
 | **6A** | Schrödinger-from-TDF action benchmark (ρ, τ phase-density action; 1D numerical consistency) | ✅ |
-| **6D+** | Decoherence, measurement | Planned |
+| **6E+** | Measurement collapse, Born-rule derivation | Planned |
 
 **Phase 6A** does **not** modify rotation, cosmology, or NFW equations. See [quantum_limit/SCHRODINGER_DERIVATION.md](./quantum_limit/SCHRODINGER_DERIVATION.md).
 
@@ -56,7 +57,7 @@ Command: `python scripts/run_schrodinger_from_tdf.py`
 | Phase | Milestone | Status |
 |-------|-----------|--------|
 | **6B** | Dirac / spinor limit benchmark (γ matrices, H(k), Ψ = √ρ e^{−iτ} χ, g̃, m = p_τ/c) | ✅ |
-| **6D+** | Decoherence, measurement | Planned |
+| **6E+** | Measurement collapse, Born rule | Planned |
 
 Command: `python scripts/run_dirac_spinor_limit.py`
 
@@ -69,9 +70,48 @@ Command: `python scripts/run_dirac_spinor_limit.py`
 | Phase | Milestone | Status |
 |-------|-----------|--------|
 | **6C** | Entanglement / τ geometry (two-qubit, CHSH, concurrence, no-signaling) | ✅ |
-| **6D+** | Decoherence, measurement collapse | Planned |
+| **6E+** | Measurement collapse, Born rule | Planned |
 
 Command: `python scripts/run_entanglement_tau_geometry.py`
+
+---
+
+## v0.13.0 — Decoherence and measurement dynamics from τ variance
+
+**Goal:** Model **decoherence** as suppression of branch coherence from growth in Var(Δτ) — without claiming full measurement-problem solution.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6D** | Decoherence from τ-variance (C = exp(−½Var), Γ = ½ dVar/dt) | ✅ |
+| **6E** | Classical metric emergence / objective-collapse proxy (τ averaging → g̃) | ✅ |
+| **6F** | Born-rule / probability emergence proxy (ρ_i → P_i, χ² rule comparison) | ✅ |
+| **6G+** | Full Born derivation, objective collapse | Planned |
+
+Commands: `python scripts/run_decoherence_tau_variance.py`, `python scripts/run_classical_metric_emergence.py`, `python scripts/run_born_rule_probability.py`
+
+---
+
+## v0.14.0 — Classical metric emergence / objective collapse proxy
+
+**Goal:** Test whether noisy microscopic τ configurations can be averaged into a stable classical effective τ field and corresponding disformal metric — **without** claiming full objective collapse or Born-rule derivation.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6E** | Classical metric emergence from τ averaging (1+1D g̃, variance suppression, branch metric merge) | ✅ |
+
+Command: `python scripts/run_classical_metric_emergence.py`
+
+---
+
+## v0.15.0 — Born rule / probability emergence proxy
+
+**Goal:** Test whether branch weights **ρ_i** behave as stable probabilities after τ-variance decoherence and coarse-graining — **without** claiming full Born-rule derivation or solving the measurement problem.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6F** | Born-rule probability emergence (P_i = ρ_i/Σρ, decoherence diagonals, χ² vs wrong rules) | ✅ |
+
+Command: `python scripts/run_born_rule_probability.py`
 
 ---
 

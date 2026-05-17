@@ -367,6 +367,66 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 
 ---
 
+## Phase 6D — Decoherence from τ-variance benchmark ✅ (implemented)
+
+**Objective:** Test whether growth in **Var(Δτ_AB)** between quantum branches suppresses coherence C_AB = exp(−½ Var) while preserving controlled-rate decay Γ = ½ dVar/dt.
+
+**Banner:** `DECOHERENCE FROM TAU VARIANCE BENCHMARK — NOT FULL MEASUREMENT-PROBLEM SOLUTION`
+
+**Commands:** `python scripts/run_decoherence_tau_variance.py`
+
+**Module:** `src/tdf_obs/validation/decoherence_tau_variance.py`
+
+**Cases:** coherent control; linear decoherence; Gaussian τ noise; correlated-noise protection; environment σ sweep; mass-proxy Γ ∝ M².
+
+**Outputs:** `decoherence_tau_variance_summary.csv`, `decoherence_tau_variance_report.md`, `decoherence_*.png`
+
+**Tests:** `pytest tests/test_decoherence_tau_variance.py`
+
+**Status:** implemented. **Not** collapse or Born-rule derivation.
+
+---
+
+## Phase 6E — Classical metric emergence from τ averaging ✅ (implemented)
+
+**Objective:** Test whether microscopic τ fluctuations can be coarse-grained into a stable effective classical τ field and smooth **disformal metric** g̃ = η + α_τ ∂τ̄ ∂τ̄ (1+1D toy).
+
+**Banner:** `CLASSICAL METRIC EMERGENCE BENCHMARK — NOT FULL OBJECTIVE-COLLAPSE SOLUTION`
+
+**Commands:** `python scripts/run_classical_metric_emergence.py`
+
+**Module:** `src/tdf_obs/validation/classical_metric_emergence.py`
+
+**Cases:** smooth control; noisy microscopic τ; correlated-noise protected; two-branch decohered metric merge; insufficient averaging (intentional fail); excessive gradient (intentional fail).
+
+**Outputs:** `classical_metric_emergence_summary.csv`, `classical_metric_emergence_report.md`, `classical_metric_*.png`
+
+**Tests:** `pytest tests/test_classical_metric_emergence.py`
+
+**Status:** implemented. **Not** objective collapse, Born-rule derivation, or full measurement theory.
+
+---
+
+## Phase 6F — Born-rule probability emergence proxy ✅ (implemented)
+
+**Objective:** Test whether branch weights **ρ_i** behave as stable probabilities **P_i = ρ_i / Σρ_j** after decoherence, using **c_i = √(ρ_i) e^(−iτ_i)** and multinomial frequency convergence.
+
+**Banner:** `BORN-RULE PROBABILITY EMERGENCE BENCHMARK — NOT FULL BORN-RULE DERIVATION`
+
+**Commands:** `python scripts/run_born_rule_probability.py`
+
+**Module:** `src/tdf_obs/validation/born_rule_probability.py`
+
+**Cases:** balanced / unequal two-branch; three-branch distribution; decoherence preserves diagonals; wrong-rule χ² comparison; coarse-graining additivity; zero-weight branch; phase invariance.
+
+**Outputs:** `born_rule_probability_summary.csv`, `born_rule_probability_report.md`, `born_rule_*.png`
+
+**Tests:** `pytest tests/test_born_rule_probability.py`
+
+**Status:** implemented. **Not** full Born-rule derivation or measurement-problem solution.
+
+---
+
 ## Phase 6 — Real observational calibration *(postponed)*
 
 > ⚠️ **Real observational calibration is intentionally postponed until ΛCDM compatibility tests (Phase 4) are completed.**
