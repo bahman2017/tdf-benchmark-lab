@@ -150,6 +150,7 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | `python scripts/run_decoherence_tau_variance.py` | 6D |
 | `python scripts/run_classical_metric_emergence.py` | 6E |
 | `python scripts/run_born_rule_probability.py` | 6F |
+| `python scripts/run_unified_microscopic_quantum_limit.py` | 6G |
 
 Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 

@@ -24,6 +24,7 @@ Reproducibility index for all implemented benchmark pipelines.
 | Decoherence / τ variance (6D) | `scripts/run_decoherence_tau_variance.py` | `outputs/tables/decoherence_tau_variance_summary.csv` | `outputs/reports/decoherence_tau_variance_report.md` | `outputs/figures/decoherence_*.png` | ✅ Implemented |
 | Classical metric emergence (6E) | `scripts/run_classical_metric_emergence.py` | `outputs/tables/classical_metric_emergence_summary.csv` | `outputs/reports/classical_metric_emergence_report.md` | `outputs/figures/classical_metric_*.png` | ✅ Implemented |
 | Born-rule probability (6F) | `scripts/run_born_rule_probability.py` | `outputs/tables/born_rule_probability_summary.csv` | `outputs/reports/born_rule_probability_report.md` | `outputs/figures/born_rule_*.png` | ✅ Implemented |
+| Unified microscopic quantum limit (6G) | `scripts/run_unified_microscopic_quantum_limit.py` | `outputs/tables/unified_microscopic_quantum_limit_matrix.csv` | `outputs/reports/unified_microscopic_quantum_limit_report.md` | `outputs/figures/unified_microscopic_*.png` | ✅ Implemented |
 
 ## Regenerate all primary benchmarks
 
@@ -48,6 +49,7 @@ python scripts/run_entanglement_tau_geometry.py
 python scripts/run_decoherence_tau_variance.py
 python scripts/run_classical_metric_emergence.py
 python scripts/run_born_rule_probability.py
+python scripts/run_unified_microscopic_quantum_limit.py
 ```
 
 See [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md) for appendix wording and per-phase notes.

@@ -85,9 +85,10 @@ Command: `python scripts/run_entanglement_tau_geometry.py`
 | **6D** | Decoherence from τ-variance (C = exp(−½Var), Γ = ½ dVar/dt) | ✅ |
 | **6E** | Classical metric emergence / objective-collapse proxy (τ averaging → g̃) | ✅ |
 | **6F** | Born-rule / probability emergence proxy (ρ_i → P_i, χ² rule comparison) | ✅ |
-| **6G+** | Full Born derivation, objective collapse | Planned |
+| **6G** | Unified microscopic quantum consistency matrix (6A–6F integration) | ✅ |
+| **7+** | 5D action derivation; full QG / measurement theory | Planned |
 
-Commands: `python scripts/run_decoherence_tau_variance.py`, `python scripts/run_classical_metric_emergence.py`, `python scripts/run_born_rule_probability.py`
+Commands: `python scripts/run_unified_microscopic_quantum_limit.py` (plus individual 6A–6F scripts)
 
 ---
 
@@ -112,6 +113,20 @@ Command: `python scripts/run_classical_metric_emergence.py`
 | **6F** | Born-rule probability emergence (P_i = ρ_i/Σρ, decoherence diagonals, χ² vs wrong rules) | ✅ |
 
 Command: `python scripts/run_born_rule_probability.py`
+
+---
+
+## v0.16.0 — Unified microscopic quantum limit of TDF
+
+**Goal:** Integrate the microscopic quantum benchmark chain (6A–6F) into one consistency report — **without** claiming full quantum gravity or modifying prior benchmark logic.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **6G** | Unified microscopic quantum consistency matrix | ✅ |
+
+Command: `python scripts/run_unified_microscopic_quantum_limit.py`
+
+**Next (v0.17.0):** Derive microscopic action more deeply from 5D geometry rather than adding proxy tests.
 
 ---
 

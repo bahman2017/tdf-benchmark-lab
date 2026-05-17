@@ -427,6 +427,26 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 
 ---
 
+## Phase 6G — Unified microscopic quantum consistency matrix ✅ (implemented)
+
+**Objective:** Integrate Phases **6A–6F** into one consistency matrix and report (read-only aggregation; no equation changes).
+
+**Banner:** `UNIFIED MICROSCOPIC QUANTUM LIMIT BENCHMARK — NOT FULL QUANTUM-GRAVITY PROOF`
+
+**Commands:** `python scripts/run_unified_microscopic_quantum_limit.py`
+
+**Module:** `src/tdf_obs/validation/unified_microscopic_quantum_limit.py`
+
+**Inputs:** Existing `*_summary.csv` and `*_report.md` from 6A–6F.
+
+**Outputs:** `unified_microscopic_quantum_limit_matrix.csv`, `unified_microscopic_quantum_limit_report.md`, `unified_microscopic_*.png`
+
+**Tests:** `pytest tests/test_unified_microscopic_quantum_limit.py`
+
+**Status:** implemented. **Not** quantum-gravity proof; recommends v0.17.0 focus on 5D action derivation.
+
+---
+
 ## Phase 6 — Real observational calibration *(postponed)*
 
 > ⚠️ **Real observational calibration is intentionally postponed until ΛCDM compatibility tests (Phase 4) are completed.**
