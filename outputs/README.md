@@ -18,6 +18,7 @@ python scripts/run_redshift_sanity_benchmark.py
 python scripts/run_core_cusp_stress.py
 python scripts/run_rotation_diversity_stress.py
 python scripts/run_same_tau_consistency.py
+python scripts/run_covariant_action_checks.py
 python scripts/run_rotation.py   # synthetic/demo unless real metadata confirmed
 ```
 

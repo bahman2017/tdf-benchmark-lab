@@ -14,6 +14,7 @@ Reproducibility index for all implemented benchmark pipelines.
 | Core–cusp stress (5A) | `scripts/run_core_cusp_stress.py` | `outputs/tables/core_cusp_stress_summary.csv` | `outputs/reports/core_cusp_stress_report.md` | `outputs/figures/core_cusp_<case>.png` | ✅ Implemented |
 | Rotation diversity (5B) | `scripts/run_rotation_diversity_stress.py` | `outputs/tables/rotation_diversity_stress_summary.csv` | `outputs/reports/rotation_diversity_stress_report.md` | `outputs/figures/rotation_diversity_<case>.png` | ✅ Implemented |
 | Same-τ multi-observable (5C) | `scripts/run_same_tau_consistency.py` | `outputs/tables/same_tau_consistency_summary.csv` | `outputs/reports/same_tau_consistency_report.md` | `outputs/figures/same_tau_<case>_*.png` | ✅ Implemented |
+| Covariant action checks (5D) | `scripts/run_covariant_action_checks.py` | `outputs/tables/covariant_action_checks_summary.csv` | `outputs/reports/covariant_action_checks_report.md` | — | ✅ Implemented |
 
 ## Regenerate all primary benchmarks
 
@@ -28,6 +29,7 @@ python scripts/run_redshift_sanity_benchmark.py
 python scripts/run_core_cusp_stress.py
 python scripts/run_rotation_diversity_stress.py
 python scripts/run_same_tau_consistency.py
+python scripts/run_covariant_action_checks.py
 ```
 
 See [PAPER_APPENDIX_GUIDE.md](./PAPER_APPENDIX_GUIDE.md) for appendix wording and per-phase notes.

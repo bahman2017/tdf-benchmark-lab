@@ -204,7 +204,8 @@ Phase 4 (compatibility recovery) is complete; stress tests now examine problem r
 |----------|-------|--------|
 | **5B** | Rotation-curve diversity stress test | ✅ implemented |
 | **5C** | Same-τ multi-observable consistency | ✅ implemented |
-| **5C+** | Hubble tension, missing satellites, etc. | not_yet_tested |
+| **5D** | Covariant action consistency checks | ✅ implemented |
+| **5E+** | Hubble tension, missing satellites, etc. | not_yet_tested |
 
 ### Phase 5B — Rotation-curve diversity stress test ✅ (implemented)
 
@@ -233,6 +234,22 @@ Phase 4 (compatibility recovery) is complete; stress tests now examine problem r
 **Pass rule:** rotation, lensing, and redshift relative errors all &lt; 5% (controlled synthetic).
 
 **Status:** implemented (6 cases). **Not** observational validation; no separate τ fits per channel.
+
+### Phase 5D — Covariant action consistency checks ✅ (implemented)
+
+**Objective:** Apply EFT/action-level **proxy** sanity checks to fitted **(B, r0)** from the NFW surrogate
+benchmark: weak-field identity `r dΦ/dr = B r/(r+r0)`, τ-gradient, disformal safety, k-essence stability,
+effective-density finiteness.
+
+**Banner:** `COVARIANT ACTION CONSISTENCY CHECK — NOT REAL OBSERVATIONAL DATA`
+
+**Prerequisite:** `outputs/tables/nfw_surrogate_fit_summary.csv` (auto-runs NFW surrogate if missing unless `--no-run-nfw`).
+
+**Commands:** `python scripts/run_covariant_action_checks.py`
+
+**Outputs:** `covariant_action_checks_summary.csv`, `covariant_action_checks_report.md`
+
+**Status:** implemented. **Not** a proof of the covariant action; **not** observational validation.
 
 ---
 
