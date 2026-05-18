@@ -158,7 +158,300 @@ Command: `python scripts/run_born_rule_probability.py`
 
 Command: `python scripts/run_unified_microscopic_quantum_limit.py`
 
-**Next (v0.18.0+):** Derive microscopic action more deeply from 5D geometry rather than adding further proxy tests.
+---
+
+## SPARC Step 7 — Final synthesis ✅ (completed)
+
+**Goal:** Single paper-ready package from corrected-MOND run + Steps 1–6 (summary, decision matrix, claim level, recommendation).
+
+Output: `outputs/runs/sparc_final_synthesis/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_final_synthesis.py \
+  --output-dir outputs \
+  --run-id sparc_final_synthesis \
+  --versioned-output true
+```
+
+---
+
+## SPARC Step 6F — 5D projection kernel ✅ (completed)
+
+**Goal:** Replace per-galaxy λ_b with 5D-inspired projection kernel K(R,R').
+
+Output: `outputs/runs/sparc_step_6f_5d_projection_kernel/`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_5d_projection_kernel.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --field-run outputs/runs/sparc_step_6d_tau_field_equation_solver \
+  --robustness-run outputs/runs/sparc_step_6e_tau_field_robustness \
+  --calibration-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --output-dir outputs \
+  --run-id sparc_step_6f_5d_projection_kernel \
+  --versioned-output true \
+  --overwrite-run true
+```
+
+---
+
+## SPARC Step 6E — τ field robustness audit ✅ (completed)
+
+**Goal:** Audit Step 6D for parameter stability, global λ_b, M/L sensitivity, boundary filtering, residuals.
+
+Output: `outputs/runs/sparc_step_6e_tau_field_robustness/`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tau_field_robustness.py \
+  --field-run outputs/runs/sparc_step_6d_tau_field_equation_solver \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --calibration-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --output-dir outputs \
+  --run-id sparc_step_6e_tau_field_robustness \
+  --versioned-output true \
+  --overwrite-run true
+```
+
+---
+
+## SPARC Step 6D — τ field-equation solver ✅ (completed)
+
+**Goal:** Solve radial τ field equation (cumulative form) with multiple μ(σ′/a₀) choices vs algebraic Steps 6B/6C.
+
+Output: `outputs/runs/sparc_step_6d_tau_field_equation_solver/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tau_field_solver.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --inverse-design-run outputs/runs/sparc_step_6a_tau_inverse_design \
+  --inverse-response-run outputs/runs/sparc_step_6b_inverse_tau_response \
+  --tau-law-run outputs/runs/sparc_step_6c_baryon_constrained_tau_law \
+  --output-dir outputs \
+  --run-id sparc_step_6d_tau_field_equation_solver \
+  --versioned-output true \
+  --overwrite-run true
+```
+
+---
+
+## SPARC Step 6C — Baryon-constrained τ coupling law ✅ (completed)
+
+**Goal:** Replace per-galaxy flexible β with global baryon-constrained laws (A–D) + R_core; compare to Step 6B and baselines.
+
+Output: `outputs/runs/sparc_step_6c_baryon_constrained_tau_law/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_baryon_constrained_tau_law.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --inverse-design-run outputs/runs/sparc_step_6a_tau_inverse_design \
+  --inverse-response-run outputs/runs/sparc_step_6b_inverse_tau_response \
+  --output-dir outputs \
+  --run-id sparc_step_6c_baryon_constrained_tau_law \
+  --versioned-output true
+```
+
+---
+
+## SPARC Step 6B — Inverse-designed τ response benchmark ✅ (completed)
+
+**Goal:** Test Step 6A candidate `a_τ = β_eff √(a_b a₀) R_core(r)` variants vs old TDF and halo baselines with correct BIC penalties.
+
+Output: `outputs/runs/sparc_step_6b_inverse_tau_response/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_inverse_tau_response.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --inverse-design-run outputs/runs/sparc_step_6a_tau_inverse_design \
+  --output-dir outputs \
+  --run-id sparc_step_6b_inverse_tau_response \
+  --versioned-output true
+```
+
+---
+
+## SPARC Step 6A — τ inverse design ✅ (completed)
+
+**Goal:** Infer required `a_τ(r)`, outer slopes, core radius, and β_eff proxies from SPARC dark-matter-like residuals (inverse-design diagnostics only).
+
+Output: `outputs/runs/sparc_step_6a_tau_inverse_design/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tau_inverse_design.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_6a_tau_inverse_design \
+  --versioned-output true
+```
+
+---
+
+## SPARC Step 6 — Residual diagnostics ✅ (completed)
+
+**Goal:** Map where TDF and baselines succeed or fail by radius, galaxy class, and residual magnitude.
+
+Output: `outputs/runs/sparc_step_6_residual_diagnostics/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_residual_diagnostics.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_6_residual_diagnostics \
+  --versioned-output true
+```
+
+---
+
+## SPARC Step 5 — TDF parameter stability ✅ (completed)
+
+**Goal:** Test whether fitted TDF β/M is coherent across SPARC or acts as per-galaxy nuisance freedom.
+
+Output: `outputs/runs/sparc_step_5_tdf_parameter_stability/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tdf_parameter_stability.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_5_tdf_parameter_stability \
+  --versioned-output true
+```
+
+---
+
+## SPARC Step 4 — Cored halo baseline ✅ (completed)
+
+**Goal:** Compare TDF to NFW plus Burkert (and pseudo-isothermal) cored DM baselines on SPARC.
+
+Output: `outputs/runs/sparc_step_4_cored_halo_baseline/`
+
+Command:
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_cored_halo_baseline.py \
+  --input data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_4_cored_halo_baseline \
+  --versioned-output true
+```
+
+---
+
+## SPARC Step 3 — M/L robustness ✅ (completed)
+
+**Goal:** Test TDF SPARC competitiveness under fixed, narrow, and standard Υ priors.
+
+Output: `outputs/runs/sparc_step_3_mass_to_light_robustness/`
+
+---
+
+## SPARC Step 2 — Galaxy-class analysis ✅ (completed)
+
+**Goal:** Compare TDF / NFW / corrected MOND by dwarf / intermediate / massive (v_max proxy).
+
+Output: `outputs/runs/sparc_step_2_galaxy_class_analysis/`
+
+---
+
+## SPARC Step 1 — Boundary-filtered analysis ✅ (completed)
+
+**Goal:** Test stability of corrected-MOND SPARC BIC comparison after excluding boundary-limited NFW/TDF galaxies.
+
+Output: `outputs/runs/sparc_step_1_boundary_filtered/`
+
+---
+
+## v0.20.2.1 — Versioned output hygiene ✅ (completed)
+
+**Goal:** Isolate benchmark runs under `outputs/runs/<run_id>/`; prevent pytest from overwriting production reports.
+
+---
+
+## v0.20.2 — Corrected MOND SPARC rerun (Phase 8A.2) ✅ (completed)
+
+**Goal:** Fair SPARC comparison with analytic MOND baseline; separate `_corrected_mond` outputs.
+
+Command: `PYTHONPATH=src python3 scripts/run_sparc_real_calibration.py --corrected-mond true --output-dir outputs`
+
+---
+
+## v0.20.1 — SPARC parameter audit (Phase 8A.1) ✅ (completed)
+
+**Goal:** Audit Phase 8A calibration (MOND baseline, parameter bounds, BIC fairness) before paper upgrade — **not** full validation.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **8A.1** | MOND unit/active check; boundary flags; parameter-count audit; audited TDF vs NFW summary | ✅ |
+
+Command: `PYTHONPATH=src python3 scripts/run_sparc_parameter_audit.py --output-dir outputs`
+
+---
+
+## v0.21.0 — Real SPARC calibration (Phase 8A) ✅ (completed)
+
+**Goal:** Fit **real** SPARC rotation curves; compare baryon / NFW / MOND / TDF K-essence by BIC — **not** full validation.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **8A** | Per-galaxy ML fits; model comparison tables; calibration report | ✅ |
+
+Command: `PYTHONPATH=src python3 scripts/run_sparc_real_calibration.py --input data/processed/sparc_rotation.csv --output-dir outputs`
+
+---
+
+## v0.20.0 — SPARC raw data parser (Phase 8A.0) ✅ (completed)
+
+**Goal:** Ingest real Lelli et al. (2016) SPARC rotmod files into a validated processed CSV — **no** model fitting yet.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **8A.0** | `Rotmod_LTG` → `sparc_rotation.csv`; schema validation; parser report | ✅ |
+
+Command: `PYTHONPATH=src python3 scripts/parse_sparc_real_data.py --input data/raw/16284118/Rotmod_LTG --output data/processed/sparc_rotation.csv`
+
+---
+
+## v0.19.0 — Disk geometry / SPARC-style rotation calibration (Phase 7B) ✅ (completed)
+
+**Goal:** Axisymmetric **disk** K-essence rotation proxies — flatness improvement vs baryon-only, not real SPARC.
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **7B** | Cylindrical disk equation; 8 cases; rotation / BTF proxy figures | ✅ |
+
+Command: `PYTHONPATH=src python3 scripts/run_disk_kessence_rotation.py`
+
+---
+
+## v0.18.0 — K-essence source viability benchmark (Phase 7A) ✅ (completed)
+
+**Goal:** Test whether **conformal trace** sourcing can generate spatial τ gradients from static baryons in spherical proxies — and document that **pure disformal** static dust cannot (`div J = 0`).
+
+| Phase | Milestone | Status |
+|-------|-----------|--------|
+| **7A** | K-essence radial equation; μ models; seven viability cases; five figures | ✅ |
+
+Command: `PYTHONPATH=src python3 scripts/run_kessence_source_viability.py`
+
+**Not claimed:** observational validation, SPARC replacement, full 5D derivation of conformal coupling, disk geometry, lensing.
 
 ---
 

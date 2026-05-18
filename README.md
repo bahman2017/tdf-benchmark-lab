@@ -153,6 +153,25 @@ pytest -v tests/test_nfw_surrogate_expanded.py
 | `python scripts/run_born_rule_probability.py` | 6F |
 | `python scripts/run_unified_microscopic_quantum_limit.py` | 6G |
 | `python scripts/run_muon_g2_anomaly.py` | 6H — μon (g−2) / ε_τ phenomenology |
+| `PYTHONPATH=src python3 scripts/run_kessence_source_viability.py` | 7A — K-essence source viability (spherical proxy; **not** observational validation) |
+| `PYTHONPATH=src python3 scripts/run_disk_kessence_rotation.py` | 7B — Disk K-essence rotation (axisymmetric proxy; **not** real SPARC validation) |
+| `PYTHONPATH=src python3 scripts/parse_sparc_real_data.py --input data/raw/16284118/Rotmod_LTG --output data/processed/sparc_rotation.csv` | 8A.0 — Parse real SPARC rotmod (**not** model validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_real_calibration.py --input data/processed/sparc_rotation.csv --output-dir outputs` | 8A — Real SPARC calibration (**not** full observational validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_parameter_audit.py --output-dir outputs` | 8A.1 — SPARC parameter / MOND baseline audit (**not** full observational validation; does not overwrite 8A tables) |
+| `PYTHONPATH=src python3 scripts/run_sparc_real_calibration.py --corrected-mond true --run-id v0.20.2_corrected_mond_sparc_calibration --overwrite-run true` | 8A.2 — Corrected analytic MOND rerun → `outputs/runs/v0.20.2_corrected_mond_sparc_calibration/` (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_boundary_filtered_analysis.py` | SPARC Step 1 — boundary-filtered BIC analysis (**not** full validation; no new fitting) |
+| `PYTHONPATH=src python3 scripts/run_sparc_galaxy_class_analysis.py` | SPARC Step 2 — galaxy-class BIC analysis (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_ml_robustness.py` | SPARC Step 3 — M/L robustness reruns (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_cored_halo_baseline.py` | SPARC Step 4 — Burkert / pseudo-isothermal baseline (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_tdf_parameter_stability.py` | SPARC Step 5 — TDF β/M stability diagnostics (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_residual_diagnostics.py` | SPARC Step 6 — residual diagnostics by radius/class (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_tau_inverse_design.py` | SPARC Step 6A — τ inverse design from DM phenomenology proxy (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_inverse_tau_response.py` | SPARC Step 6B — inverse-designed τ response benchmark (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_baryon_constrained_tau_law.py` | SPARC Step 6C — baryon-constrained τ coupling laws (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_tau_field_solver.py` | SPARC Step 6D — τ field-equation solver (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_tau_field_robustness.py` | SPARC Step 6E — τ field robustness audit (**not** full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_5d_projection_kernel.py` | SPARC Step 6F — 5D projection kernel (**theoretical proxy**, not full validation) |
+| `PYTHONPATH=src python3 scripts/run_sparc_final_synthesis.py` | SPARC Step 7 — final synthesis & paper-ready section (**not** full validation) |
 
 Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/PAPER_APPENDIX_GUIDE.md).
 
@@ -160,12 +179,46 @@ Full command list and appendix guidance: [docs/PAPER_APPENDIX_GUIDE.md](./docs/P
 
 ## Output structure
 
+### Versioned benchmark outputs (default since v0.20.2.1)
+
+Production SPARC and benchmark runs write to isolated folders:
+
+```text
+outputs/runs/<run_id>/
+  tables/
+  reports/
+  figures/
+  metadata/run_manifest.json
+```
+
+Examples:
+
+- `outputs/runs/v0.20.2_corrected_mond_sparc_calibration/` — corrected analytic MOND calibration
+- `outputs/runs/sparc_step_1_boundary_filtered/` — Step 1 boundary-filtered BIC comparison (analysis only)
+- `outputs/runs/sparc_step_2_galaxy_class_analysis/` — Step 2 galaxy-class BIC comparison (analysis only)
+- `outputs/runs/sparc_step_3_mass_to_light_robustness/` — Step 3 M/L robustness reruns (analysis only)
+- `outputs/runs/sparc_step_4_cored_halo_baseline/` — Step 4 Burkert / pseudo-isothermal baseline (analysis only)
+- `outputs/runs/sparc_step_5_tdf_parameter_stability/` — Step 5 TDF parameter stability (analysis only)
+- `outputs/runs/sparc_step_6_residual_diagnostics/` — Step 6 residual diagnostics (analysis only)
+- `outputs/runs/sparc_step_6a_tau_inverse_design/` — Step 6A τ inverse-design diagnostics (analysis only)
+- `outputs/runs/sparc_step_6b_inverse_tau_response/` — Step 6B inverse τ response benchmark (analysis only)
+- `outputs/runs/sparc_step_6c_baryon_constrained_tau_law/` — Step 6C baryon-constrained τ laws (analysis only)
+- `outputs/runs/sparc_step_6d_tau_field_equation_solver/` — Step 6D τ field-equation solver (analysis only)
+- `outputs/runs/sparc_step_6e_tau_field_robustness/` — Step 6E τ field robustness audit (analysis only)
+- `outputs/runs/sparc_step_6f_5d_projection_kernel/` — Step 6F 5D projection kernel (analysis only)
+- `outputs/runs/sparc_final_synthesis/` — Step 7 final SPARC synthesis (analysis only)
+- `outputs/runs/v0.20.1_sparc_parameter_audit/` — parameter / MOND baseline audit
+- `outputs/runs/v0.20.0_sparc_initial_calibration/` — initial Phase 8A calibration
+
+Legacy flat paths (`outputs/tables/`, etc.) are **not** written unless `--write-legacy-copy true`.
+
+### Legacy layout (optional copy only)
+
 ```text
 outputs/
-  README.md
-  tables/     # CSV summaries (generated)
-  reports/    # Markdown reports with warning banners
-  figures/    # PNG plots (generated)
+  tables/     # optional legacy copy
+  reports/
+  figures/
 ```
 
 Optional paper snapshots: [docs/results_snapshot/](./docs/results_snapshot/).

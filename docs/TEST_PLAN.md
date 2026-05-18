@@ -514,6 +514,356 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 
 ---
 
+## Phase 8A — Real SPARC rotation calibration ✅
+
+**Banner:** `REAL SPARC CALIBRATION BENCHMARK — NOT FULL OBSERVATIONAL VALIDATION`
+
+**Objective:** Fit real SPARC curves per galaxy; compare baryon-only (Υ), NFW, MOND simple, TDF K-essence; BIC selection.
+
+**Commands:**
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_real_calibration.py \
+  --input data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --max-galaxies 20
+```
+
+**Module:** `src/tdf_obs/validation/sparc_real_calibration.py`
+
+**Tests:** `pytest tests/test_sparc_real_calibration.py`
+
+**Outputs:** `sparc_real_calibration_summary.csv`, `sparc_model_comparison_by_galaxy.csv`, `sparc_real_calibration_report.md`, `sparc_*.png`
+
+**Status:** implemented. **Not** observational validation; **not** dark-matter replacement.
+
+---
+
+## SPARC Step 7 — Final synthesis ✅
+
+**Banner:** `SPARC FINAL SYNTHESIS — ROTATION-ONLY CALIBRATION, NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_final_synthesis.py \
+  --output-dir outputs \
+  --run-id sparc_final_synthesis \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_final_synthesis.py`
+
+**Pass:** Missing step dirs do not crash; assigned claim ≤ 3; paper section has no forbidden overclaim phrases.
+
+---
+
+## SPARC Step 6F — 5D projection kernel ✅
+
+**Banner:** `SPARC 5D PROJECTION KERNEL FOR TAU HALOS — THEORETICAL PROXY, NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_5d_projection_kernel.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --field-run outputs/runs/sparc_step_6d_tau_field_equation_solver \
+  --robustness-run outputs/runs/sparc_step_6e_tau_field_robustness \
+  --calibration-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --output-dir outputs \
+  --run-id sparc_step_6f_5d_projection_kernel \
+  --versioned-output true \
+  --overwrite-run true
+```
+
+**Tests:** `pytest tests/test_sparc_5d_projection_kernel.py`
+
+---
+
+## SPARC Step 6E — τ field robustness audit ✅
+
+**Banner:** `SPARC TAU FIELD ROBUSTNESS AUDIT — NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tau_field_robustness.py \
+  --field-run outputs/runs/sparc_step_6d_tau_field_equation_solver \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --calibration-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --output-dir outputs \
+  --run-id sparc_step_6e_tau_field_robustness \
+  --versioned-output true \
+  --overwrite-run true
+```
+
+**Tests:** `pytest tests/test_sparc_tau_field_robustness.py`
+
+---
+
+## SPARC Step 6D — τ field-equation solver ✅
+
+**Banner:** `SPARC TAU FIELD-EQUATION SOLVER — NUMERICAL FIELD DIAGNOSTIC, NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tau_field_solver.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --inverse-design-run outputs/runs/sparc_step_6a_tau_inverse_design \
+  --inverse-response-run outputs/runs/sparc_step_6b_inverse_tau_response \
+  --tau-law-run outputs/runs/sparc_step_6c_baryon_constrained_tau_law \
+  --output-dir outputs \
+  --run-id sparc_step_6d_tau_field_equation_solver \
+  --versioned-output true \
+  --overwrite-run true
+```
+
+**Tests:** `pytest tests/test_sparc_tau_field_solver.py`
+
+---
+
+## SPARC Step 6C — Baryon-constrained τ coupling law ✅
+
+**Banner:** `SPARC BARYON-CONSTRAINED TAU COUPLING LAW — NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_baryon_constrained_tau_law.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --inverse-design-run outputs/runs/sparc_step_6a_tau_inverse_design \
+  --inverse-response-run outputs/runs/sparc_step_6b_inverse_tau_response \
+  --output-dir outputs \
+  --run-id sparc_step_6c_baryon_constrained_tau_law \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_baryon_constrained_tau_law.py`
+
+---
+
+## SPARC Step 6B — Inverse-designed τ response benchmark ✅
+
+**Banner:** `SPARC INVERSE-DESIGNED TAU RESPONSE BENCHMARK — NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_inverse_tau_response.py \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --inverse-design-run outputs/runs/sparc_step_6a_tau_inverse_design \
+  --output-dir outputs \
+  --run-id sparc_step_6b_inverse_tau_response \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_inverse_tau_response.py`
+
+**Pass:** R_core and a_τ finite; BIC param counts increase with variant complexity; report contains NOT FULL OBSERVATIONAL VALIDATION.
+
+---
+
+## SPARC Step 6A — τ inverse design ✅
+
+**Banner:** `SPARC TAU INVERSE DESIGN — DARK-MATTER PHENOMENOLOGY PROXY, NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tau_inverse_design.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_6a_tau_inverse_design \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_tau_inverse_design.py`
+
+**Pass:** `a_τ,required ≥ 0` and finite; outer slope and core fits work on toy data; report contains NOT FULL OBSERVATIONAL VALIDATION; no dark-matter-replacement language.
+
+---
+
+## SPARC Step 6 — Residual diagnostics ✅
+
+**Banner:** `SPARC RESIDUAL DIAGNOSTICS — NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_residual_diagnostics.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_6_residual_diagnostics \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_residual_diagnostics.py`
+
+---
+
+## SPARC Step 5 — TDF parameter stability ✅
+
+**Banner:** `SPARC TDF PARAMETER STABILITY ANALYSIS — NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_tdf_parameter_stability.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_5_tdf_parameter_stability \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_tdf_parameter_stability.py`
+
+---
+
+## SPARC Step 4 — Cored halo baseline ✅
+
+**Banner:** `SPARC CORED-HALO BASELINE COMPARISON — NOT FULL OBSERVATIONAL VALIDATION`
+
+**Objective:** Fit baryon-only, corrected MOND, NFW, Burkert, pseudo-isothermal, and TDF on SPARC; compare BIC including TDF vs cored halos.
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_cored_halo_baseline.py \
+  --input data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_4_cored_halo_baseline \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_cored_halo_baseline.py`
+
+**Pass:** Burkert/pseudo-isothermal velocities finite; `burkert` in model list; report contains `NOT FULL OBSERVATIONAL VALIDATION`; tests use `tmp_path` only.
+
+---
+
+## SPARC Step 3 — M/L robustness ✅
+
+**Banner:** `SPARC MASS-TO-LIGHT ROBUSTNESS ANALYSIS — NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_ml_robustness.py \
+  --input data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_3_mass_to_light_robustness \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_ml_robustness.py`
+
+---
+
+## SPARC Step 2 — Galaxy-class analysis ✅
+
+**Banner:** `SPARC GALAXY-CLASS ANALYSIS — NOT FULL OBSERVATIONAL VALIDATION`
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_galaxy_class_analysis.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --sparc-data data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --run-id sparc_step_2_galaxy_class_analysis \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_galaxy_class_analysis.py`
+
+---
+
+## SPARC Step 1 — Boundary-filtered analysis ✅
+
+**Banner:** `SPARC BOUNDARY-FILTERED ANALYSIS — NOT FULL OBSERVATIONAL VALIDATION`
+
+**Objective:** Compare BIC outcomes with/without galaxies where NFW or TDF hits parameter bounds (analysis only).
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_boundary_filtered_analysis.py \
+  --input-run outputs/runs/v0.20.2_corrected_mond_sparc_calibration \
+  --audit-run outputs/runs/v0.20.1_sparc_parameter_audit \
+  --output-dir outputs \
+  --run-id sparc_step_1_boundary_filtered \
+  --versioned-output true
+```
+
+**Tests:** `pytest tests/test_sparc_boundary_filtered_analysis.py`
+
+---
+
+## Versioned benchmark outputs ✅
+
+**Layout:** `outputs/runs/<run_id>/{tables,reports,figures,metadata/run_manifest.json}`
+
+**Guards:** Tests must use `tmp_path` and non-production `run_id` values; `assert_production_output_safe` blocks pytest/tmp inputs from writing production run folders.
+
+**Module:** `src/tdf_obs/utils/run_outputs.py`
+
+**Tests:** `pytest tests/test_run_outputs.py`
+
+---
+
+## Phase 8A.2 — Corrected MOND SPARC rerun ✅
+
+**Banner:** `REAL SPARC CALIBRATION BENCHMARK — CORRECTED MOND BASELINE — NOT FULL OBSERVATIONAL VALIDATION`
+
+**Objective:** Rerun Phase 8A with analytic simple-μ MOND; write `*_corrected_mond` outputs only.
+
+**Commands:**
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_real_calibration.py \
+  --input data/processed/sparc_rotation.csv \
+  --output-dir outputs \
+  --mode real_sparc \
+  --corrected-mond true \
+  --run-id v0.20.2_corrected_mond_sparc_calibration \
+  --overwrite-run true
+```
+
+**Tests:** `pytest tests/test_sparc_corrected_mond_calibration.py`
+
+**Status:** implemented. Fairer rotation-only comparison; **not** full validation.
+
+---
+
+## Phase 8A.1 — SPARC parameter audit ✅
+
+**Banner:** `SPARC PARAMETER AUDIT — NOT FULL OBSERVATIONAL VALIDATION`
+
+**Objective:** Audit Phase 8A outputs for MOND baseline activity (analytic simple-μ, a₀ units), parameter boundary hits, BIC/AIC fairness, and TDF vs NFW comparison before/after excluding boundary-limited galaxies. **Does not** overwrite prior calibration tables.
+
+**Commands:**
+
+```bash
+PYTHONPATH=src python3 scripts/run_sparc_parameter_audit.py \
+  --input data/processed/sparc_rotation.csv \
+  --calibration-summary outputs/tables/sparc_real_calibration_summary.csv \
+  --comparison outputs/tables/sparc_model_comparison_by_galaxy.csv \
+  --output-dir outputs
+```
+
+**Module:** `src/tdf_obs/validation/sparc_parameter_audit.py`
+
+**Tests:** `pytest tests/test_sparc_parameter_audit.py`
+
+**Outputs:** `sparc_parameter_audit_summary.csv`, `sparc_parameter_boundary_flags.csv`, `sparc_mond_baseline_audit.csv`, `sparc_parameter_count_audit.csv`, `sparc_parameter_audit_report.md`, audit figures `sparc_mond_vs_baryon_boost.png`, `sparc_parameter_boundary_counts.png`, `sparc_delta_bic_tdf_nfw_audited.png`, `sparc_audit_by_galaxy_class.png`
+
+**Status:** implemented. **Not** observational validation; diagnostic only.
+
+---
+
+## Phase 8A.0 — SPARC raw data parser ✅
+
+**Banner:** `REAL SPARC DATA PARSED — NOT MODEL VALIDATION`
+
+**Objective:** Parse user-supplied SPARC `Rotmod_LTG` files into `data/processed/sparc_rotation.csv` with required columns and `validate_sparc_rotation_schema`.
+
+**Commands:**
+
+```bash
+PYTHONPATH=src python3 scripts/parse_sparc_real_data.py \
+  --input data/raw/16284118/Rotmod_LTG \
+  --output data/processed/sparc_rotation.csv
+```
+
+**Module:** `src/tdf_obs/data/sparc_parser.py`
+
+**Tests:** `pytest tests/test_sparc_parser.py`
+
+**Status:** implemented. **Not** TDF fitting; **not** SPARC validation claims.
+
+---
+
 ## Phase 6 — Real observational calibration *(postponed)*
 
 > ⚠️ **Real observational calibration is intentionally postponed until ΛCDM compatibility tests (Phase 4) are completed.**
@@ -530,6 +880,46 @@ sound-horizon proxy, comoving distance, and acoustic scale `ℓ_A = π D_M / r_s
 **Commands:** `python scripts/prepare_sparc_rotation.py`, `python scripts/run_rotation.py`
 
 **Status:** infrastructure exists; **active calibration deferred**.
+
+---
+
+## Phase 7A — K-essence source viability benchmark ✅
+
+**Banner:** `K-ESSENCE SOURCE VIABILITY BENCHMARK — NOT OBSERVATIONAL VALIDATION` plus standard calibration diagnostic from `INSTRUCTIONS.md`.
+
+**Objective:** Test whether corrected TDF source structure (conformal trace `S_b ∝ (β/M) ρ_b`) can dynamically generate spatial τ gradients from static baryonic matter in spherical proxies — and confirm pure disformal static dust gives **zero** source.
+
+**Cases:** pure disformal fail; conformal canonical Newtonian; deep-MOND; simple μ interpolation; insufficient coupling fail; excessive gradient fail; compact bulge deep-MOND.
+
+**Commands:** `PYTHONPATH=src python3 scripts/run_kessence_source_viability.py`
+
+**Module:** `src/tdf_obs/validation/kessence_source_viability.py`
+
+**Tests:** `pytest tests/test_kessence_source_viability.py`
+
+**Outputs:** `kessence_source_viability_summary.csv`, `kessence_source_viability_report.md`, `kessence_source_terms.png`, `kessence_tau_gradient_profiles.png`, `kessence_rotation_proxy.png`, `kessence_outer_slope.png`, `kessence_stability_proxy.png`
+
+**Status:** implemented. **Not** observational validation; **not** full MOND derivation from 5D geometry; **not** SPARC or lensing.
+
+---
+
+## Phase 7B — Axisymmetric disk K-essence rotation benchmark ✅
+
+**Banner:** `DISK K-ESSENCE ROTATION BENCHMARK — NOT REAL SPARC VALIDATION` plus standard calibration diagnostic.
+
+**Objective:** Extend Phase 7A to **disk-like** baryonic geometries; test whether conformal K-essence sourcing improves outer rotation-curve flatness (not a fixed σ′ slope).
+
+**Cases:** exponential canonical; deep K-essence; LSB extended; compact HSB; simple μ; pure disformal fail; weak coupling fail; excessive coupling fail.
+
+**Commands:** `PYTHONPATH=src python3 scripts/run_disk_kessence_rotation.py`
+
+**Module:** `src/tdf_obs/validation/disk_kessence_rotation.py`
+
+**Tests:** `pytest tests/test_disk_kessence_rotation.py`
+
+**Outputs:** `disk_kessence_rotation_summary.csv`, `disk_kessence_rotation_report.md`, `disk_kessence_*.png` (5 figures).
+
+**Status:** implemented. **Not** SPARC validation; **not** dark-matter replacement.
 
 ---
 

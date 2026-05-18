@@ -21,6 +21,7 @@ data/synthetic/*
 !data/synthetic/README.md
 
 # Generated benchmark outputs (regenerate with scripts/)
+outputs/runs/
 outputs/figures/*
 !outputs/figures/.gitkeep
 outputs/tables/*
